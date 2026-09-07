@@ -104,6 +104,12 @@ Justification, in order of strength:
 Parents are still authenticated, by PIN, at the Parental Gateway (UC-05). Authentication
 exists where the report actually needs it: guarding consent and analytics.
 
+**Owner decision (2026-09-08):** approved. Registration and leaderboards are deferred —
+this build is a proof of concept and account infrastructure is not what it needs to
+prove. Note the distinction: the owner deferred them for the demonstrator; the legal and
+pedagogical arguments above are the case for leaving them out permanently. That is a
+separate call, to be made before any pilot deployment.
+
 ---
 
 ## 4. Architecture
@@ -442,6 +448,7 @@ exist to make it possible; phases 5-7 complete the report's use-case coverage.
 
 | # | Decision | Status |
 |---|---|---|
-| 1 | Departures in §3 (MAUI over Unity; no registration or leaderboards) | Proposed; needs owner confirmation |
-| 2 | `git init` — no repository exists yet, so no work is currently tracked | Awaiting approval |
-| 3 | Real `TongaKids.Tests` project instead of the in-app self-check page | Optional; recommended |
+| 1 | Departures in §3 (MAUI over Unity; no registration or leaderboards) | **Approved 2026-09-08.** Registration deferred as out of scope for a proof of concept |
+| 2 | `git init` and commit the baseline | **Done 2026-09-08**, commit `ec4f511` |
+| 3 | Real `TongaKids.Tests` project instead of the in-app self-check page | Open. Optional, recommended if time allows |
+| 4 | Whether registration stays out permanently, on the legal grounds in §3.2 | Open. Must be settled before any pilot deployment |
