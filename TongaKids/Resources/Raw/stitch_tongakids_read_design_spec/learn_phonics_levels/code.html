@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TongaKids Read - Phonics Levels</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#6f3900",
+                        "on-secondary-fixed-variant": "#004d67",
+                        "primary-container": "#ff8a00",
+                        "on-primary-container": "#613100",
+                        "inverse-surface": "#303030",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e4e2e1",
+                        "on-tertiary-container": "#00480f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#58cafe",
+                        "tertiary-container": "#5abd5c",
+                        "primary-fixed-dim": "#ffb77f",
+                        "on-primary-fixed": "#2f1500",
+                        "on-surface-variant": "#564334",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed": "#001e2b",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb77f",
+                        "secondary-fixed-dim": "#75d1ff",
+                        "outline-variant": "#ddc1ae",
+                        "tertiary": "#006e1c",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-container": "#f0eded",
+                        "secondary": "#006688",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffdcc4",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#8a7362",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#c2e8ff",
+                        "on-tertiary-fixed": "#002204",
+                        "background": "#fbf9f8",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary": "#914c00",
+                        "surface-tint": "#914c00",
+                        "surface": "#fbf9f8",
+                        "tertiary-fixed": "#94f990",
+                        "on-secondary-container": "#005370",
+                        "surface-dim": "#dcd9d9",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "phonics-focus": ["Nunito Sans"],
+                        "headline-lg-mobile": ["Nunito Sans"],
+                        "label-lg": ["Nunito Sans"],
+                        "title-lg": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "display-lg": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "phonics-focus": ["64px", {"lineHeight": "80px", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .tactile-card {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.08), inset 0 -4px 0 0 rgba(0,0,0,0.05);
+        }
+        .tactile-card:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.08), inset 0 -1px 0 0 rgba(0,0,0,0.05);
+        }
+        .progress-leaf-green {
+            background-color: #006e1c;
+        }
+        .star-glow {
+            filter: drop-shadow(0 0 4px rgba(255, 191, 0, 0.6));
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen pb-24 font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center w-full px-margin-mobile py-sm">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-variant dark:hover:bg-surface-container-high transition-colors text-primary active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary dark:text-primary-fixed-dim">
+                Phonics Levels
+            </h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-primary-container">
+<img alt="Child Profile Avatar" class="w-full h-full object-cover" data-alt="A charming, stylized cartoon avatar of a young Zambian child with a bright, joyful expression. The character is rendered in a soft, 3D illustrative style with warm lighting and a vibrant orange background that matches the TongaKids Read brand. The overall mood is encouraging and friendly, perfect for an educational learning environment for kids." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5edY0Cb3sxt-azAc3UQWuhrGUruL8eujfeePgokatcXyY3i3pKVHQjAFO3UavZQDXIHgHNdfuL_UbxUKbHp67zTeqnJ4M_APJxbHes3DoankGuSrD8EGk-KpwPYeakoHGINlYYFNcfdyC-oCkwOXqBxLQbDxsCwrWu5VzKrKnRWSJS9xVK7UTfLpOE6du-6yv3-zUQKGhfIgrWfIMLmz30scii2x1XgTRlkBHHXnUneET5ymnbRLXq1u2kXOhKzK4_PxA_4vI2GO7"/>
+</div>
+</header>
+<main class="px-margin-mobile py-lg max-w-4xl mx-auto">
+<!-- Welcome Message -->
+<div class="mb-xl text-center md:text-left">
+<h2 class="font-title-lg text-title-lg text-on-surface-variant mb-xs">Mwapoloka! (Hello!)</h2>
+<p class="font-body-lg text-body-lg text-outline">Let's continue your phonics journey today.</p>
+</div>
+<!-- Levels Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Level 1: Unlocked, Completed -->
+<div class="tactile-card bg-surface-container-lowest p-md rounded-xl border border-[#E0D8C3] relative overflow-hidden flex flex-col gap-sm group cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="w-16 h-16 bg-secondary-fixed rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-secondary-fixed-variant" data-icon="flutter_dash">flutter_dash</span>
+</div>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-amber-500 star-glow" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-amber-500 star-glow" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-amber-500 star-glow" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Level 1: Vowels</h3>
+<p class="font-body-md text-on-surface-variant">Learn the sounds of A, E, I, O, U</p>
+</div>
+<div class="mt-auto pt-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-label-lg text-label-lg text-tertiary">100% Complete</span>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-lg transition-transform active:scale-95">Review</button>
+</div>
+</div>
+<!-- Level 2: Current -->
+<div class="tactile-card bg-surface-container-lowest p-md rounded-xl border-2 border-primary-container relative overflow-hidden flex flex-col gap-sm cursor-pointer scale-[1.02] shadow-xl">
+<div class="absolute top-0 right-0 bg-primary-container text-on-primary-container font-label-lg px-4 py-1 rounded-bl-xl">
+                    CURRENT
+                </div>
+<div class="flex justify-between items-start">
+<div class="w-16 h-16 bg-primary-fixed rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-on-primary-fixed-variant" data-icon="music_note">music_note</span>
+</div>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-amber-500 star-glow" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline-variant" data-icon="star">star</span>
+<span class="material-symbols-outlined text-outline-variant" data-icon="star">star</span>
+</div>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-primary font-extrabold">Level 2: Simple Syllables</h3>
+<p class="font-body-md text-on-surface-variant">Combining letters to make basic sounds.</p>
+</div>
+<div class="mt-auto pt-sm">
+<div class="w-full bg-surface-variant h-3 rounded-full overflow-hidden mb-2">
+<div class="bg-primary-container h-full rounded-full" style="width: 40%"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface-variant">Progress: 40%</span>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg border-b-4 border-primary shadow-md active:border-b-0 active:translate-y-1 transition-all">PLAY</button>
+</div>
+</div>
+</div>
+<!-- Level 3: Locked -->
+<div class="tactile-card bg-surface-dim/40 p-md rounded-xl border border-outline-variant opacity-80 grayscale-[0.5] relative overflow-hidden flex flex-col gap-sm">
+<div class="absolute inset-0 bg-surface-dim/20 backdrop-blur-[2px] flex items-center justify-center z-10">
+<div class="bg-white/90 p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-3xl text-outline" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="w-16 h-16 bg-surface-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-outline" data-icon="extension">extension</span>
+</div>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface-variant">Level 3: Word Building</h3>
+<p class="font-body-md text-outline">Mastering short words and structures.</p>
+</div>
+<div class="mt-auto pt-sm">
+<span class="font-label-lg text-label-lg text-outline">Complete Level 2 to unlock</span>
+</div>
+</div>
+<!-- Level 4: Locked -->
+<div class="tactile-card bg-surface-dim/40 p-md rounded-xl border border-outline-variant opacity-80 grayscale-[0.5] relative overflow-hidden flex flex-col gap-sm">
+<div class="absolute inset-0 bg-surface-dim/20 backdrop-blur-[2px] flex items-center justify-center z-10">
+<div class="bg-white/90 p-3 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-3xl text-outline" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="w-16 h-16 bg-surface-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-outline" data-icon="auto_stories">auto_stories</span>
+</div>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface-variant">Level 4: Sentence Reading</h3>
+<p class="font-body-md text-outline">Reading your first Tonga sentences.</p>
+</div>
+<div class="mt-auto pt-sm">
+<span class="font-label-lg text-label-lg text-outline">Complete Level 3 to unlock</span>
+</div>
+</div>
+</div>
+<!-- Visual Motivator Card (Bento-style) -->
+<div class="mt-xl bg-secondary-fixed p-lg rounded-3xl flex flex-col md:flex-row items-center gap-lg border-2 border-secondary overflow-hidden relative">
+<div class="absolute top-0 right-0 opacity-10">
+<span class="material-symbols-outlined text-[160px]" data-icon="reward">ward</span>
+</div>
+<div class="relative z-10 flex-1">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-secondary-fixed-variant mb-sm">You're doing great!</h3>
+<p class="font-body-lg text-body-lg text-on-secondary-fixed-variant/80 mb-md">Keep playing to earn 10 more stars and unlock a special badge for your avatar.</p>
+<div class="flex items-center gap-4">
+<div class="bg-white/80 px-4 py-2 rounded-full font-label-lg text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-xl" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+                        15 / 25 Stars
+                    </div>
+</div>
+</div>
+<div class="w-32 h-32 md:w-40 md:h-40 bg-white rounded-2xl shadow-inner p-2 rotate-3 hover:rotate-0 transition-transform">
+<img alt="Reward Badge Preview" class="w-full h-full object-contain" data-alt="A brightly colored, whimsical digital illustration of a 'Master Reader' badge for a children's app. The badge features a stylized golden book with a smiling face, surrounded by sparkling green leaves and small orange stars. The art style is tactile and friendly, with soft shadows and a vibrant, warm color palette that fits the TongaKids Read aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv1pIO3OK4UMDBhE-GZgJf-ErIujjus4Fr9iVm4F3qkBLpgpsyRtzeAJJJyRO6SbJ5uhJkAVmDUDntMxiZPrQgYx7XvkdhA7rZTUcKdL7X4eRGb82bcR6icjPMIuFGxy2RW0jZiaJM_ZoO6y5lMX0Yb1INJWN2gJ4d1YbPJsxLhPC39quD7AY_RaaCacvZEBqLtLWB5BgSu2NxEO52ihMqj5QgH9bBkd_z1yaOs-YBLQIywdQADAezINwgmSctDEh_EJ-jtLy60GD0"/>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-low dark:bg-surface-container-lowest shadow-[0_-4px_8px_0_rgba(0,0,0,0.08)] flex justify-around items-center px-4 pb-4 pt-2 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/20 rounded-full transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[32dp]" data-icon="home">home</span>
+<span class="font-label-lg text-label-lg">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-tertiary-container dark:bg-tertiary text-on-tertiary-container dark:text-on-tertiary rounded-full px-6 py-2 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-[32dp]" data-icon="menu_book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-lg text-label-lg">Stories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/20 rounded-full transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[32dp]" data-icon="star">star</span>
+<span class="font-label-lg text-label-lg">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/20 rounded-full transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[32dp]" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.tactile-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                if (!card.classList.contains('opacity-80')) {
+                    card.style.transform = 'translateY(-4px)';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                if (!card.classList.contains('opacity-80')) {
+                    card.style.transform = card.classList.contains('scale-[1.02]') ? 'scale(1.02)' : 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body></html>

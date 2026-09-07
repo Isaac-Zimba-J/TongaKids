@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TongaKids Read - Splash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#6f3900",
+                      "on-secondary-fixed-variant": "#004d67",
+                      "primary-container": "#ff8a00",
+                      "on-primary-container": "#613100",
+                      "inverse-surface": "#303030",
+                      "on-surface": "#1b1c1c",
+                      "surface-variant": "#e4e2e1",
+                      "on-tertiary-container": "#00480f",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#58cafe",
+                      "tertiary-container": "#5abd5c",
+                      "primary-fixed-dim": "#ffb77f",
+                      "on-primary-fixed": "#2f1500",
+                      "on-surface-variant": "#564334",
+                      "surface-container-high": "#eae8e7",
+                      "on-secondary-fixed": "#001e2b",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#ffb77f",
+                      "secondary-fixed-dim": "#75d1ff",
+                      "outline-variant": "#ddc1ae",
+                      "tertiary": "#006e1c",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f3f0f0",
+                      "surface-container": "#f0eded",
+                      "secondary": "#006688",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#ffdcc4",
+                      "on-tertiary": "#ffffff",
+                      "outline": "#8a7362",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#fbf9f8",
+                      "on-background": "#1b1c1c",
+                      "secondary-fixed": "#c2e8ff",
+                      "on-tertiary-fixed": "#002204",
+                      "background": "#fbf9f8",
+                      "tertiary-fixed-dim": "#78dc77",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-container-highest": "#e4e2e1",
+                      "primary": "#914c00",
+                      "surface-tint": "#914c00",
+                      "surface": "#fbf9f8",
+                      "tertiary-fixed": "#94f990",
+                      "on-secondary-container": "#005370",
+                      "surface-dim": "#dcd9d9",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#005313"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "sm": "12px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "base": "8px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "phonics-focus": ["Nunito Sans"],
+                      "headline-lg-mobile": ["Nunito Sans"],
+                      "label-lg": ["Nunito Sans"],
+                      "title-lg": ["Nunito Sans"],
+                      "headline-lg": ["Nunito Sans"],
+                      "body-lg": ["Nunito Sans"],
+                      "display-lg": ["Nunito Sans"],
+                      "body-md": ["Nunito Sans"]
+              },
+              "fontSize": {
+                      "phonics-focus": ["64px", {"lineHeight": "80px", "fontWeight": "800"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "700"}],
+                      "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #fbf9f8;
+            overflow: hidden;
+        }
+        .splash-gradient {
+            background: linear-gradient(180deg, #ff8a00 0%, #fff8e7 100%);
+        }
+        .bounce-gentle {
+            animation: bounce-gentle 3s infinite ease-in-out;
+        }
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .progress-loader {
+            width: 140px;
+            height: 6px;
+            background-color: rgba(145, 76, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-loader::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 40%;
+            background-color: #914c00;
+            border-radius: 10px;
+            animation: loading 2s infinite ease-in-out;
+        }
+        @keyframes loading {
+            0% { left: -40%; }
+            100% { left: 100%; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen splash-gradient">
+<!-- Splash Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile relative">
+<!-- Decorative Elements: Soft Floating Clouds/Leaves -->
+<div class="absolute top-10 left-10 opacity-20 bounce-gentle">
+<span class="material-symbols-outlined text-on-primary-container text-6xl">cloud</span>
+</div>
+<div class="absolute top-24 right-12 opacity-10" style="animation: bounce-gentle 4s infinite reverse ease-in-out;">
+<span class="material-symbols-outlined text-on-primary-container text-8xl">cloud</span>
+</div>
+<!-- Center Illustration Container -->
+<div class="relative w-full max-w-sm aspect-square flex items-center justify-center mb-xl">
+<div class="absolute inset-0 bg-white/30 rounded-full blur-3xl scale-110"></div>
+<!-- Hero Image: Child and Baobab -->
+<div class="relative z-10 w-full h-full p-8 transition-transform duration-700 hover:scale-105 cursor-pointer">
+<img alt="Cartoon Baobab Tree with Child reading" class="w-full h-full object-contain drop-shadow-2xl" data-alt="A large, friendly cartoon baobab tree with thick gnarled branches and lush green leaves, rendered in a warm 3D tactile style. Underneath its shade sits a young African child happily reading a thick book with glowing colorful pages. The setting is a soft, vibrant savanna at golden hour, using a palette of warm oranges, soft creams, and earthy greens. The lighting is nurturing and high-key, creating a modern and playful educational atmosphere for young learners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxmxsZchvY-dehlHHznYFzqaSPVA3rqlmEPQ6YNBCw5YWVI7heSUZLaJIqJnzWPFhaG8vzOLuvHb6uAEaqwnbj6VsyU_V6mj1Aevi9oXUsssT8ME9tAH-k4lpLZE2bAyj8I_KBdaGYaFXtuoaEN0gz-Abq_xsOvtGP4WI4SqhgV9ZmQKSniSbeX7GOS2M_5JTY46eFrAVAPGwlm9mS7LF42GY8I9CEIwINM57mAuC-DjPYVVtaAu2zuJ09VpfhY1MTBe2NgWD5N9tV"/>
+</div>
+</div>
+<!-- Branding Section -->
+<div class="text-center z-20">
+<h1 class="font-display-lg text-display-lg text-primary mb-xs tracking-tight">
+                TongaKids Read
+            </h1>
+<div class="flex items-center justify-center space-x-md text-on-surface-variant font-title-lg text-title-lg opacity-80">
+<span class="font-bold">Learn</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-bold">Read</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-bold">Grow</span>
+</div>
+</div>
+</main>
+<!-- Bottom Loading & Progress -->
+<footer class="pb-xl flex flex-col items-center space-y-md">
+<div class="progress-loader"></div>
+<p class="font-label-lg text-label-lg text-on-surface-variant/60 uppercase tracking-widest">
+            Loading Adventures...
+        </p>
+</footer>
+<!-- Interactive Layer: Particles / Sparkles (Vanilla JS) -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.body;
+            const colors = ['#ff8a00', '#5abd5c', '#58cafe', '#ffb77f'];
+
+            function createSparkle() {
+                const sparkle = document.createElement('div');
+                const size = Math.random() * 8 + 4;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                sparkle.style.position = 'fixed';
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.backgroundColor = color;
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '5';
+                sparkle.style.opacity = '0.6';
+                
+                const startX = Math.random() * window.innerWidth;
+                const startY = window.innerHeight + 10;
+                
+                sparkle.style.left = `${startX}px`;
+                sparkle.style.top = `${startY}px`;
+                
+                container.appendChild(sparkle);
+                
+                const animation = sparkle.animate([
+                    { transform: 'translateY(0) scale(1)', opacity: 0.6 },
+                    { transform: `translateY(-${window.innerHeight + 100}px) translateX(${(Math.random() - 0.5) * 100}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 4000,
+                    easing: 'linear'
+                });
+                
+                animation.onfinish = () => sparkle.remove();
+            }
+
+            setInterval(createSparkle, 300);
+
+            // Micro-interaction on logo
+            const logo = document.querySelector('h1');
+            logo.addEventListener('mouseenter', () => {
+                logo.classList.add('scale-105', 'transition-transform');
+            });
+            logo.addEventListener('mouseleave', () => {
+                logo.classList.remove('scale-105');
+            });
+        });
+    </script>
+</body></html>

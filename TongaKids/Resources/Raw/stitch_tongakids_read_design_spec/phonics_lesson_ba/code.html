@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TongaKids Read - Phonics Lesson</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .press-effect:active {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(90, 189, 92, 0.4);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#6f3900",
+                        "on-secondary-fixed-variant": "#004d67",
+                        "primary-container": "#ff8a00",
+                        "on-primary-container": "#613100",
+                        "inverse-surface": "#303030",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e4e2e1",
+                        "on-tertiary-container": "#00480f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#58cafe",
+                        "tertiary-container": "#5abd5c",
+                        "primary-fixed-dim": "#ffb77f",
+                        "on-primary-fixed": "#2f1500",
+                        "on-surface-variant": "#564334",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed": "#001e2b",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb77f",
+                        "secondary-fixed-dim": "#75d1ff",
+                        "outline-variant": "#ddc1ae",
+                        "tertiary": "#006e1c",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-container": "#f0eded",
+                        "secondary": "#006688",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffdcc4",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#8a7362",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#c2e8ff",
+                        "on-tertiary-fixed": "#002204",
+                        "background": "#fbf9f8",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary": "#914c00",
+                        "surface-tint": "#914c00",
+                        "surface": "#fbf9f8",
+                        "tertiary-fixed": "#94f990",
+                        "on-secondary-container": "#005370",
+                        "surface-dim": "#dcd9d9",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "phonics-focus": ["Nunito Sans"],
+                        "headline-lg-mobile": ["Nunito Sans"],
+                        "label-lg": ["Nunito Sans"],
+                        "title-lg": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "display-lg": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "phonics-focus": ["64px", {"lineHeight": "80px", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- Top Navigation Anchor (Manual implementation of TopAppBar logic from JSON) -->
+<header class="sticky top-0 z-50 bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center w-full px-margin-mobile py-sm">
+<div class="flex items-center gap-md">
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-primary hover:bg-surface-variant transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[32px]">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-title-lg text-title-lg text-on-surface">Lesson 2: Syllables</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Lesson 2 of 10</p>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-primary/20">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A charming, high-quality 3D illustration of a friendly cartoon child character's face, specifically designed for a premium educational app interface. The character has a cheerful expression and is set against a soft sky-blue background. The lighting is bright and warm, matching a modern, clean light-mode aesthetic with a vibrant color palette of orange and green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2WEwssqGPKS8HyKYD1ALPaEho2sEt8aZr-dUt7QekupY8I749nCfPSaH_6YvNftom4zK91cOdoywhRvOq7wHpxGLhiHANcWHp1VWrBW5ikRgIg2AYHtFlZxRnmFaX9N-EhQtMWnCIIZ9DqOSGRMRxlZA_4vUhE6rsgy71PuhrkvER4GFG0LAt6Z3xwlFDvpfXUmYSS_-JBBl0516l1oWlQBbv2RIZlYw5zQpkvT9cy48RnDA6uqiZODtRuxE-uX5z6oiClhnIG5MP"/>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile py-lg">
+<!-- Progress Bar Component -->
+<div class="w-full max-w-md bg-surface-container-low rounded-full h-3 mb-xl relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full bg-tertiary-container rounded-full transition-all duration-500 ease-out" style="width: 20%;"></div>
+</div>
+<!-- Phonics Display Section -->
+<div class="flex flex-col items-center justify-center space-y-xl">
+<!-- Large Phonics Card -->
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary-container/10 blur-xl rounded-full scale-110 group-hover:scale-125 transition-transform duration-700"></div>
+<div class="bg-surface-container-lowest border-2 border-[#E0D8C3] rounded-[48px] px-20 py-16 shadow-[0_8px_16px_rgba(0,0,0,0.08)] flex items-center justify-center relative z-10 floating">
+<span class="text-[120px] font-phonics-focus text-primary-container leading-none select-none">BA</span>
+</div>
+</div>
+<!-- Audio Interaction -->
+<div class="flex flex-col items-center gap-sm">
+<button class="w-24 h-24 bg-tertiary-container rounded-full flex items-center justify-center text-on-tertiary-container shadow-[0_6px_0_0_#00480f] press-effect glow-effect transition-all active:translate-y-1 active:shadow-none" id="audio-btn">
+<span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+<p class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-widest">Tap to hear</p>
+</div>
+</div>
+<!-- Instructional Image (Bento style hint) -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-md w-full max-w-2xl">
+<div class="bg-white p-sm rounded-xl border border-outline-variant/30 flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-secondary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Banana" class="w-full h-full object-cover" data-alt="A vibrant, studio-lit photo of a ripe, yellow banana against a clean, soft cream background. The image is crisp with high contrast, conveying a sense of health and energy. The lighting is soft and even, perfectly fitting into a tactile-modern design system for early childhood education." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvN9fuYYG1zw8pmYwifs5yBOnd_Xtqlmt2SdCe91InQu9stN5DyqFNVi7JCBoa_q2e-AAeg9s6BCu0DIqu6H_Y8AEGWcUSf3gQ4dEGQ6d4Dym4zHsQlnd9KfmF09iLyDbm8i9LQb6Suo2v-KWgmd8axX-3NCvZwp8rfGkGWP4mbxqXqXhrTXzH3VSnmnEcqXgAHe6f-p2xIQoj42EqHZUAo-Zy_hjchStwWFSHZ7MNbO1svXmLedSQwfuRN29bNVU6g-Hs12ywMS9k"/>
+</div>
+<div>
+<p class="font-title-lg text-title-lg text-secondary">Ba-nana</p>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Starts with BA</p>
+</div>
+</div>
+<div class="bg-white p-sm rounded-xl border border-outline-variant/30 flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-tertiary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Ball" class="w-full h-full object-cover" data-alt="A bright, colorful inflatable beach ball isolated on a soft pastel background. The lighting is cheerful and bright, highlighting the primary colors of the ball. The style is professional commercial photography for a child-friendly digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApbCWHGdSgcQhqUWzXQKOwRlY3uqxT6vL_voPof0E5z4h9Zuo2zhHShe4iLGs3kHzG0gLK60AqS8xPPbTjZsgy2b9Qw1r517DzRUZBzxhO4TzOOCXA2AUd99XaASfbD7j33KTE26PbGZyCFMX0xTEmT2-1RfCIJA38AI87f0_-qyJz6q0eg2CPOGEH1-cgbRfnUOFWjBnh14p2P_UT4DdM2uigpaUmJn9UlphMnUjsmYdBh78cA3tnyYhK8v2uXYOE0CtVqH6LZJPN"/>
+</div>
+<div>
+<p class="font-title-lg text-title-lg text-tertiary">Ba-lu</p>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Ball in Chitonga</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Actions & Navigation Shell -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest px-4 pb-8 pt-4 space-y-4">
+<!-- Primary Action Buttons -->
+<div class="flex flex-col gap-sm max-w-md mx-auto">
+<button class="w-full py-4 bg-primary-container text-white font-title-lg rounded-xl shadow-[0_4px_0_0_#613100] press-effect active:translate-y-1 active:shadow-none">
+                Play Game
+            </button>
+<div class="flex gap-md">
+<button class="flex-1 py-4 border-2 border-secondary text-secondary font-title-lg rounded-xl press-effect flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined">chevron_left</span>
+                    Previous
+                </button>
+<button class="flex-1 py-4 bg-secondary text-white font-title-lg rounded-xl shadow-[0_4px_0_0_#004d67] press-effect flex items-center justify-center gap-xs">
+                    Next
+                    <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Global Bottom Navigation (Suppressed for transactional learning screens as per guidelines, but keeping structure if needed for context) -->
+<!-- Based on JSON: This screen is 'Task-Focused' (Lesson), so we prioritize the lesson controls -->
+</footer>
+<script>
+        // Simple Micro-interaction for Audio Button
+        const audioBtn = document.getElementById('audio-btn');
+        const icon = audioBtn.querySelector('.material-symbols-outlined');
+
+        audioBtn.addEventListener('click', () => {
+            // Visual feedback
+            icon.classList.add('scale-125');
+            audioBtn.classList.add('glow-effect');
+            
+            // Simulate audio play
+            setTimeout(() => {
+                icon.classList.remove('scale-125');
+                audioBtn.classList.remove('glow-effect');
+            }, 500);
+
+            // In a real app, this would trigger: new Audio('path/to/ba_sound.mp3').play();
+            console.log("Playing sound: BA");
+        });
+
+        // Add subtle hover sparkle logic if we wanted to be fancy
+        document.addEventListener('mousemove', (e) => {
+            // Optional: Mouse tracking light effect
+        });
+    </script>
+</body></html>

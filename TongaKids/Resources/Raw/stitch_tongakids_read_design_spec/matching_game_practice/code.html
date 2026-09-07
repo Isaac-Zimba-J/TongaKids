@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TongaKids Read - Matching Game</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#6f3900",
+                    "on-secondary-fixed-variant": "#004d67",
+                    "primary-container": "#ff8a00",
+                    "on-primary-container": "#613100",
+                    "inverse-surface": "#303030",
+                    "on-surface": "#1b1c1c",
+                    "surface-variant": "#e4e2e1",
+                    "on-tertiary-container": "#00480f",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#58cafe",
+                    "tertiary-container": "#5abd5c",
+                    "primary-fixed-dim": "#ffb77f",
+                    "on-primary-fixed": "#2f1500",
+                    "on-surface-variant": "#564334",
+                    "surface-container-high": "#eae8e7",
+                    "on-secondary-fixed": "#001e2b",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#ffb77f",
+                    "secondary-fixed-dim": "#75d1ff",
+                    "outline-variant": "#ddc1ae",
+                    "tertiary": "#006e1c",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f3f0f0",
+                    "surface-container": "#f0eded",
+                    "secondary": "#006688",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdcc4",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#8a7362",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fbf9f8",
+                    "on-background": "#1b1c1c",
+                    "secondary-fixed": "#c2e8ff",
+                    "on-tertiary-fixed": "#002204",
+                    "background": "#fbf9f8",
+                    "tertiary-fixed-dim": "#78dc77",
+                    "surface-container-low": "#f6f3f2",
+                    "surface-container-highest": "#e4e2e1",
+                    "primary": "#914c00",
+                    "surface-tint": "#914c00",
+                    "surface": "#fbf9f8",
+                    "tertiary-fixed": "#94f990",
+                    "on-secondary-container": "#005370",
+                    "surface-dim": "#dcd9d9",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#005313"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "sm": "12px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "base": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "phonics-focus": ["Nunito Sans"],
+                    "headline-lg-mobile": ["Nunito Sans"],
+                    "label-lg": ["Nunito Sans"],
+                    "title-lg": ["Nunito Sans"],
+                    "headline-lg": ["Nunito Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "display-lg": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "phonics-focus": ["64px", {"lineHeight": "80px", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #fbf9f8; /* Soft Cream */
+            overflow-x: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Tactile Button Effects */
+        .tactile-button {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            box-shadow: 0 4px 0 0 rgba(0,0,0,0.1);
+        }
+        .tactile-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.1);
+        }
+        .phonics-card {
+            border-bottom-width: 4px;
+        }
+        .phonics-card:active {
+            transform: scale(0.95);
+        }
+        .phonics-card.selected {
+            border-color: #006e1c; /* tertiary */
+            box-shadow: 0 0 20px rgba(90, 189, 92, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Playful Stars Background */
+        .star-decoration {
+            position: absolute;
+            color: #ffdc91;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Animation for Glowing */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(255, 138, 0, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(255, 138, 0, 0.6); }
+            100% { box-shadow: 0 0 5px rgba(255, 138, 0, 0.2); }
+        }
+        .glow-active {
+            animation: glow 2s infinite ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col relative">
+<!-- Playful Background Decorations -->
+<span class="material-symbols-outlined star-decoration top-10 left-10 text-[48px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-decoration top-40 right-10 text-[32px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-decoration bottom-20 left-20 text-[64px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-decoration bottom-40 right-20 text-[40px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<!-- Top Navigation Bar (Predicted Shared Component) -->
+<header class="bg-surface shadow-sm docked full-width top-0 z-50 flex justify-between items-center w-full px-margin-mobile py-sm">
+<div class="flex items-center gap-md">
+<button class="p-xs rounded-full hover:bg-surface-variant transition-colors active:scale-95 text-primary">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary">TongaKids Read</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-primary">
+<img alt="Child Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANn2ORWDouAkhpXut5x44NYIVyLxG5WZ5Z213vUPhxa5i6Z5kX3beY9WT4W2YmA4FXIQIi3SzDeYx7cAsMm6-q0AQ6W7a-5EMHxqmylfLps86joMKzkGOojOyQVe5kIPbwvoA8kNkbq0OW7vKy2EEa7zj3Fm5sfudWLBtZYGmEyMQIa0TiYOiqJdBSjEq1Vg2VLmBdq21770ICtsPE1bUg8aFCISxXQMASIn4qL3rW7ZZCLNgeRc3Vf_8ocZyUCg4LbhMBObgIt8hj"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile pt-xl pb-32 max-w-2xl mx-auto w-full">
+<!-- Instruction Section -->
+<section class="text-center mb-xl w-full">
+<div class="inline-flex items-center gap-md bg-white p-lg rounded-xl shadow-sm border border-[#E0D8C3] mb-base">
+<h2 class="font-title-lg text-title-lg text-on-surface">Which one says 'BA'?</h2>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-secondary text-on-secondary shadow-md hover:scale-105 active:scale-95 transition-transform" id="audio-trigger">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<p class="font-body-md text-on-surface-variant">Tap the card that matches the sound.</p>
+</section>
+<!-- Phonics Grid (Bento Style) -->
+<div class="grid grid-cols-2 gap-lg w-full">
+<!-- BA Button (Selected/Correct Target) -->
+<button class="phonics-card selected glow-active h-48 flex flex-col items-center justify-center bg-white rounded-xl border-4 border-tertiary transition-all duration-200" onclick="selectCard(this)">
+<span class="font-phonics-focus text-phonics-focus text-primary">BA</span>
+<div class="mt-xs bg-tertiary-container px-base py-xs rounded-full">
+<span class="font-label-lg text-label-lg text-on-tertiary-container">Sound Match</span>
+</div>
+</button>
+<!-- DA Button -->
+<button class="phonics-card h-48 flex flex-col items-center justify-center bg-white rounded-xl border-b-[6px] border-secondary border-x border-t border-secondary/20 transition-all duration-200" onclick="selectCard(this)">
+<span class="font-phonics-focus text-phonics-focus text-secondary">DA</span>
+</button>
+<!-- MA Button -->
+<button class="phonics-card h-48 flex flex-col items-center justify-center bg-white rounded-xl border-b-[6px] border-primary-container border-x border-t border-primary-container/20 transition-all duration-200" onclick="selectCard(this)">
+<span class="font-phonics-focus text-phonics-focus text-primary-container">MA</span>
+</button>
+<!-- PA Button -->
+<button class="phonics-card h-48 flex flex-col items-center justify-center bg-white rounded-xl border-b-[6px] border-error border-x border-t border-error/20 transition-all duration-200" onclick="selectCard(this)">
+<span class="font-phonics-focus text-phonics-focus text-error">PA</span>
+</button>
+</div>
+<!-- Submit Button Container (Fixed-ish above bottom nav) -->
+<div class="fixed bottom-24 left-0 w-full px-margin-mobile flex justify-center z-40">
+<button class="w-full max-w-xs h-14 bg-primary text-on-primary font-title-lg text-title-lg rounded-full shadow-[0_4px_0_0_#6f3900] active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-base" id="submit-btn">
+                Submit
+                <span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Predicted Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-low rounded-t-xl shadow-[0_-4px_8px_0_rgba(0,0,0,0.08)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-secondary-container/50 rounded-full transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[32px]">home</span>
+<span class="font-label-lg text-label-lg">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-6 py-2 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-label-lg text-label-lg">Stories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-secondary-container/50 rounded-full transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[32px]">star</span>
+<span class="font-label-lg text-label-lg">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-secondary-container/50 rounded-full transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[32px]">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<script>
+        function selectCard(element) {
+            // Remove selection from all cards
+            document.querySelectorAll('.phonics-card').forEach(card => {
+                card.classList.remove('selected', 'glow-active', 'border-4', 'border-tertiary');
+                card.classList.add('border-b-[6px]');
+                // Re-add color specific borders if needed or let CSS handle it
+            });
+
+            // Add selection to clicked card
+            element.classList.add('selected', 'glow-active', 'border-4', 'border-tertiary');
+            element.classList.remove('border-b-[6px]');
+
+            // Haptic-like feedback (Visual)
+            element.style.transform = "scale(1.08)";
+            setTimeout(() => {
+                element.style.transform = "scale(1.05)";
+            }, 150);
+        }
+
+        // Simple audio simulation
+        document.getElementById('audio-trigger').addEventListener('click', function() {
+            const btn = this;
+            btn.classList.add('bg-tertiary');
+            setTimeout(() => {
+                btn.classList.remove('bg-tertiary');
+            }, 500);
+            
+            // In a real app, this would play "BA" sound
+            console.log("Playing sound: BA");
+        });
+
+        // Submit logic
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            const selected = document.querySelector('.phonics-card.selected');
+            if(selected && selected.innerText.includes('BA')) {
+                // Success Interaction
+                confettiEffect();
+                this.innerHTML = 'Correct! <span class="material-symbols-outlined">celebration</span>';
+                this.classList.replace('bg-primary', 'bg-tertiary');
+            } else {
+                // Shake effect for wrong answer
+                const container = document.querySelector('.grid');
+                container.classList.add('animate-shake');
+                setTimeout(() => container.classList.remove('animate-shake'), 500);
+            }
+        });
+
+        function confettiEffect() {
+            // Simple visual cue for success
+            const body = document.body;
+            for(let i=0; i<20; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'absolute w-3 h-3 rounded-full z-50';
+                conf.style.backgroundColor = ['#ff8a00', '#5abd5c', '#58cafe'][Math.floor(Math.random()*3)];
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = '-10px';
+                body.appendChild(conf);
+                
+                const anim = conf.animate([
+                    { transform: 'translateY(0) rotate(0)', opacity: 1 },
+                    { transform: `translateY(100vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                });
+                anim.onfinish = () => conf.remove();
+            }
+        }
+    </script>
+<style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .animate-shake {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+            animation-iteration-count: 2;
+        }
+    </style>
+</body></html>

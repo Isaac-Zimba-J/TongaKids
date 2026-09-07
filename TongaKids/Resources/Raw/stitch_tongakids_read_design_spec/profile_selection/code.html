@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Learner Profile Selection - TongaKids Read</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#6f3900",
+                        "on-secondary-fixed-variant": "#004d67",
+                        "primary-container": "#ff8a00",
+                        "on-primary-container": "#613100",
+                        "inverse-surface": "#303030",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e4e2e1",
+                        "on-tertiary-container": "#00480f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#58cafe",
+                        "tertiary-container": "#5abd5c",
+                        "primary-fixed-dim": "#ffb77f",
+                        "on-primary-fixed": "#2f1500",
+                        "on-surface-variant": "#564334",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed": "#001e2b",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb77f",
+                        "secondary-fixed-dim": "#75d1ff",
+                        "outline-variant": "#ddc1ae",
+                        "tertiary": "#006e1c",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-container": "#f0eded",
+                        "secondary": "#006688",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffdcc4",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#8a7362",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#c2e8ff",
+                        "on-tertiary-fixed": "#002204",
+                        "background": "#fbf9f8",
+                        "tertiary-fixed-dim": "#78dc77",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary": "#914c00",
+                        "surface-tint": "#914c00",
+                        "surface": "#fbf9f8",
+                        "tertiary-fixed": "#94f990",
+                        "on-secondary-container": "#005370",
+                        "surface-dim": "#dcd9d9",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "8px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "phonics-focus": ["Nunito Sans"],
+                        "headline-lg-mobile": ["Nunito Sans"],
+                        "label-lg": ["Nunito Sans"],
+                        "title-lg": ["Nunito Sans"],
+                        "headline-lg": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "display-lg": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "phonics-focus": ["64px", {"lineHeight": "80px", "fontWeight": "800"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .avatar-pop:active {
+            transform: scale(0.95);
+        }
+        .press-effect {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .press-effect:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col relative overflow-hidden">
+<!-- Atmospheric Background Elements -->
+<div class="floating-orb bg-secondary-container w-64 h-64 -top-20 -left-20 animate-pulse"></div>
+<div class="floating-orb bg-tertiary-container w-80 h-80 -bottom-32 -right-20 animate-pulse" style="animation-delay: 2s;"></div>
+<!-- Top App Bar (From Shared Components) -->
+<header class="bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center w-full px-margin-mobile py-sm sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-variant dark:hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 transition-transform duration-150" data-icon="arrow_back">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary dark:text-primary-fixed-dim">TongaKids Read</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border-2 border-outline-variant">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvqlig_RMgqukd4crUw26tk_zxqJ5BOPlmL7Abv1p4xGih35bHlDj4zuEfJSfGbVhLbkp4QCJ0s6xjfK-oXY11FfAk6m5w1hIsEIFhAhIAvQIGhQ_jnhj3ypsg8iBRkcmhOdagNAVZN7vPGMYJKAM2o1Rr0OcZN2EDZNStgDAMm6DTdwqR3PZEHNXCuO7QpbZQwIYwZSYWEbv6ePYkebI2ilGojxHqo0ETFN7Li0jp4SPDj2utfGj7k4k78-9M_suIpN-AIXUztKMe"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile py-xl relative z-10">
+<!-- Header Greeting -->
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Who is learning today?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose your profile to start reading!</p>
+</div>
+<!-- Profile Selection Grid (Bento-style asymmetric twist for tactile cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-lg w-full max-w-4xl">
+<!-- Chipo -->
+<button class="flex flex-col items-center group transition-all duration-300">
+<div class="relative mb-md">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-surface-container-lowest border-4 border-tertiary-container shadow-lg flex items-center justify-center p-1 group-hover:scale-105 group-active:scale-95 transition-transform duration-200">
+<div class="w-full h-full rounded-full overflow-hidden bg-tertiary-fixed-dim/20">
+<img class="w-full h-full object-cover" data-alt="A cheerful Zambian child with a bright smile, wearing a vibrant green shirt, depicted in a friendly digital illustration style. The lighting is warm and sunny, set against a soft cream background that aligns with a nurturing educational app aesthetic. The artwork is clean, modern, and inviting for young learners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVdpU_zlZO-gMHPGwNEGsB-2vwUXucquEc3V7NXX03sorF24iWEpIlGT1rpqjS_w3lCsa7c_Y3VCycdE9T91qrg2puDns3273xBVE0o7Rgw8--H4LSs9OJGnex3S_-LRu6g-G_RiD06U34CEVFFb_XAlmSsRyqfe8aufCLFFbwAQA3THB8w0s9XoQFyQeadRUgEcueSZYhcX9fzTUeikRxiwPqdlXtOY7yHAyhYL0JtamJ6dcSQyxJTlSxu7VXhJKUaiCP-cSBzV8-"/>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-tertiary text-on-tertiary rounded-full p-2 shadow-md">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+</div>
+<span class="font-title-lg text-title-lg text-on-surface group-hover:text-tertiary transition-colors">Chipo</span>
+</button>
+<!-- Mwaka -->
+<button class="flex flex-col items-center group transition-all duration-300">
+<div class="relative mb-md">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-surface-container-lowest border-4 border-secondary-container shadow-lg flex items-center justify-center p-1 group-hover:scale-105 group-active:scale-95 transition-transform duration-200">
+<div class="w-full h-full rounded-full overflow-hidden bg-secondary-fixed-dim/20">
+<img class="w-full h-full object-cover" data-alt="A joyful young African girl with braided hair and a sparkling expression, wearing a sky blue dress. The digital painting is bright and high-key with soft diffused lighting, maintaining a tactile feel. The character radiates curiosity and energy, perfectly suited for a primary education platform with soft cream tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxweJ4GjSuZ_HhMIvoagJjNg7i_SfDHfqGyN_zEJYAmedogmqHZLUgQOcQnpE8alD9hkKgmI3ZIU7wLaQfKPrF1WaMhCKO_rCFN9oM0Av7ijYZEOhbx9SAhp6lsXhn3rr1NZ86Hw7mIPHSyZpLYak2YroLw2I87hXNfBMM_fLbA5NRBGuKyL991bPam17SM5YHzrl67pyybD42UQZtL_vQAeJHeCPhono11WaKIMILSo1Y_gmlZFhbqNRMg7ykFFQ8lsH53_XJON-B"/>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary rounded-full p-2 shadow-md">
+<span class="material-symbols-outlined text-[20px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<span class="font-title-lg text-title-lg text-on-surface group-hover:text-secondary transition-colors">Mwaka</span>
+</button>
+<!-- Twaambo -->
+<button class="flex flex-col items-center group transition-all duration-300">
+<div class="relative mb-md">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-surface-container-lowest border-4 border-primary-container shadow-lg flex items-center justify-center p-1 group-hover:scale-105 group-active:scale-95 transition-transform duration-200">
+<div class="w-full h-full rounded-full overflow-hidden bg-primary-fixed-dim/20">
+<img class="w-full h-full object-cover" data-alt="A friendly young boy with a curious look, wearing a warm orange sweater, presented in a clean and soft digital art style. The atmosphere is encouraging and safe, with high-quality rendering and gentle ambient occlusion. The background is a minimalist soft cream, highlighting the child as the central focus of this educational experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZgUbpooPSAGxQy7DOzrCdqcz4skbUhy4-DGoLSZA6dHV3p1POVmyjPmAI2ldG9-QKdjQjRn0llb0NMXlM5TwclBpZ-CHV4OQ6wmdtwk3pqRUoMsApPy1_Gm2FyJJZIvW7lcMC_mK7_YoGmDm0z1l6NHmCfKFoX1B-K5IXEJQuTu11GqR-hqRqrJKPNDlnoCGDNdTMW0vU0foGNpQ52r2RL3G_IEmnu-O7FcAtqrtXX63c-1UcGRlgQ6xHQ8xwltknCGdoifeeQ1qy"/>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary rounded-full p-2 shadow-md">
+<span class="material-symbols-outlined text-[20px]" data-icon="rocket_launch" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+</div>
+<span class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Twaambo</span>
+</button>
+</div>
+<!-- Add New Learner Button -->
+<button class="mt-xl flex items-center gap-md bg-surface-container border-2 border-dashed border-outline-variant px-xl py-lg rounded-xl hover:bg-surface-variant transition-all group w-full max-w-sm press-effect">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-outline group-hover:bg-primary-container group-hover:text-white transition-colors shadow-sm">
+<span class="material-symbols-outlined font-bold" data-icon="add">add</span>
+</div>
+<span class="font-title-lg text-title-lg text-on-surface-variant group-hover:text-on-surface transition-colors">Add New Learner</span>
+</button>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-16 h-16 bg-primary-container text-on-primary-container rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 border-b-4 border-primary/50 group">
+<span class="material-symbols-outlined text-[32px]" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="absolute right-20 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-lg font-label-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Quick Entry</span>
+</button>
+<!-- Bottom Nav Bar (From Shared Components) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-low dark:bg-surface-container-lowest shadow-[0_-4px_8px_0_rgba(0,0,0,0.08)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-tertiary-container dark:bg-tertiary text-on-tertiary-container dark:text-on-tertiary rounded-full px-6 py-2 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-lg text-label-lg">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/20 rounded-full transition-all active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-lg text-label-lg">Stories</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/20 rounded-full transition-all active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-label-lg text-label-lg">Progress</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-2 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/20 rounded-full transition-all active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for profile selection
+        document.querySelectorAll('.group').forEach(profile => {
+            profile.addEventListener('click', () => {
+                // Visual feedback for selection
+                profile.classList.add('ring-4', 'ring-primary', 'rounded-xl', 'p-2');
+                setTimeout(() => {
+                    // Simulation of navigation or selection
+                    alert('Logging in as ' + profile.querySelector('span').innerText + '!');
+                }, 400);
+            });
+        });
+    </script>
+</body></html>
