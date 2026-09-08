@@ -3,6 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TongaKids.Views.SplashPage"
              Shell.NavBarIsVisible="False">
-    <Label Text="Splash" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="{StaticResource PrimaryContainer}" Offset="0.0" />
+            <GradientStop Color="{StaticResource PrimaryFixed}" Offset="0.55" />
+            <GradientStop Color="{StaticResource Surface}" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout Padding="{StaticResource ScreenPadding}"
+                         Spacing="16" VerticalOptions="Center">
+
+        <Image Source="illus_splash_baobab.png"
+               HeightRequest="280" Aspect="AspectFit" />
+
+        <Label Text="TongaKids Read" Style="{StaticResource DisplayLg}"
+               TextColor="{StaticResource Primary}"
+               HorizontalTextAlignment="Center" />
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+            <Label Text="Learn" Style="{StaticResource TitleLg}" />
+            <Label Text="&#x2022;" Style="{StaticResource TitleLg}"
+                   TextColor="{StaticResource PrimaryContainer}" />
+            <Label Text="Read" Style="{StaticResource TitleLg}" />
+            <Label Text="&#x2022;" Style="{StaticResource TitleLg}"
+                   TextColor="{StaticResource PrimaryContainer}" />
+            <Label Text="Grow" Style="{StaticResource TitleLg}" />
+        </HorizontalStackLayout>
+
+        <ProgressBar x:Name="LoadingBar" Progress="0.4"
+                     Style="{StaticResource PillProgress}"
+                     WidthRequest="240" HorizontalOptions="Center" Margin="0,40,0,0" />
+
+        <Label Text="LOADING ADVENTURES..." Style="{StaticResource LabelLg}"
+               TextColor="{StaticResource OnSurfaceVariant}"
+               CharacterSpacing="2" HorizontalTextAlignment="Center" />
+    </VerticalStackLayout>
 </ContentPage>

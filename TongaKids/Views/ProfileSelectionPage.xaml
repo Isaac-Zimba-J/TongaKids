@@ -1,8 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TongaKids.Models"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.ProfileSelectionPage"
+             x:DataType="vm:ProfileSelectionViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Profiles" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="24">
+
+            <Label Text="TongaKids Read" Style="{StaticResource TitleLg}"
+                   TextColor="{StaticResource Primary}" HorizontalTextAlignment="Center" />
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Who is learning today?" Style="{StaticResource HeadlineLg}"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Choose your profile to start reading!"
+                       Style="{StaticResource BodyMd}" HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+            <CollectionView ItemsSource="{Binding Learners}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Learner">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProfileSelectionViewModel}}, Path=SelectCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </VerticalStackLayout.GestureRecognizers>
+
+                            <!-- 120dp face: far above the 48dp minimum, easy for small hands. -->
+                            <Border HeightRequest="120" WidthRequest="120"
+                                    StrokeThickness="4"
+                                    Stroke="{StaticResource Tertiary}"
+                                    BackgroundColor="{StaticResource PrimaryFixed}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="60" />
+                                </Border.StrokeShape>
+                                <Image Source="{Binding AvatarKey, StringFormat='{0}.png'}"
+                                       Aspect="AspectFill" />
+                            </Border>
+
+                            <Label Text="{Binding Name}" Style="{StaticResource TitleLg}"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border Style="{StaticResource Card}" Padding="16">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddCommand}" />
+                </Border.GestureRecognizers>
+                <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                    <Label Text="add" Style="{StaticResource Icon}" FontSize="32"
+                           TextColor="{StaticResource Primary}" VerticalOptions="Center" />
+                    <Label Text="Add New Learner" Style="{StaticResource TitleLg}"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.LessonCompletePage"
+             x:DataType="vm:LessonCompleteViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Lesson Complete" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="24"
+                         VerticalOptions="Center">
+
+        <Label Text="{Binding Headline}" Style="{StaticResource DisplayLg}"
+               TextColor="{StaticResource Primary}" HorizontalTextAlignment="Center" />
+
+        <controls:StarRating Earned="{Binding Stars}" Total="5" StarSize="48"
+                             HorizontalOptions="Center" />
+
+        <Label Text="{Binding Message}" Style="{StaticResource BodyLg}"
+               HorizontalTextAlignment="Center" />
+
+        <Border Style="{StaticResource Card}" HorizontalOptions="Center" Padding="24,12">
+            <Label Text="{Binding ScorePercent, StringFormat='{0}%'}"
+                   Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Tertiary}" />
+        </Border>
+
+        <controls:TactileButton Text="Continue"
+                                BackgroundFill="{StaticResource PrimaryContainer}"
+                                DepthColor="{StaticResource OnPrimaryContainer}"
+                                TextColor="{StaticResource OnPrimary}"
+                                Command="{Binding ContinueCommand}" />
+    </VerticalStackLayout>
 </ContentPage>

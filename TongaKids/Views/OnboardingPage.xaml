@@ -1,8 +1,64 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.OnboardingPage"
+             x:DataType="vm:OnboardingViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Onboarding" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <Grid RowDefinitions="*,Auto" Padding="{StaticResource ScreenPadding}">
+
+        <CarouselView Grid.Row="0"
+                      ItemsSource="{Binding Slides}"
+                      Position="{Binding Position, Mode=TwoWay}"
+                      IndicatorView="Indicator"
+                      Loop="False">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="vm:OnboardingSlide">
+                    <VerticalStackLayout Spacing="24" VerticalOptions="Center">
+                        <Border BackgroundColor="{StaticResource PrimaryFixed}"
+                                StrokeThickness="0" HeightRequest="320">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="24" />
+                            </Border.StrokeShape>
+                            <Image Source="{Binding ImageKey, StringFormat='{0}.png'}"
+                                   Aspect="AspectFit" Margin="24" />
+                        </Border>
+                        <Label Text="{Binding Title}" Style="{StaticResource HeadlineLg}"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalTextAlignment="Center" />
+                        <Label Text="{Binding Body}" Style="{StaticResource BodyLg}"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="24">
+            <IndicatorView x:Name="Indicator"
+                           HorizontalOptions="Center"
+                           IndicatorColor="{StaticResource SurfaceContainerHighest}"
+                           SelectedIndicatorColor="{StaticResource Primary}"
+                           IndicatorSize="10" />
+
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                <Label Grid.Column="0" Text="Skip" Style="{StaticResource TitleLg}"
+                       TextColor="{StaticResource Secondary}"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SkipCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <controls:TactileButton Grid.Column="2"
+                                        Text="{Binding NextLabel}"
+                                        BackgroundFill="{StaticResource PrimaryContainer}"
+                                        DepthColor="{StaticResource OnPrimaryContainer}"
+                                        TextColor="{StaticResource OnPrimary}"
+                                        Command="{Binding NextCommand}"
+                                        WidthRequest="180" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

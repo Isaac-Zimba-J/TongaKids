@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.MatchingGamePage"
-             Shell.NavBarIsVisible="False">
-    <Label Text="Matching Game" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+             x:DataType="vm:MatchingGameViewModel"
+             Title="TongaKids Read">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource ScreenPadding}" RowSpacing="16">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="8">
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <Label Grid.Column="0" Text="{Binding Prompt}"
+                           Style="{StaticResource TitleLg}" VerticalOptions="Center" />
+                    <Border Grid.Column="1" WidthRequest="56" HeightRequest="56"
+                            BackgroundColor="{StaticResource Secondary}" StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="28" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PlayPromptCommand}" />
+                        </Border.GestureRecognizers>
+                        <Label Text="volume_up" Style="{StaticResource Icon}" FontSize="28"
+                               TextColor="{StaticResource OnSecondary}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+            </Border>
+            <Label Text="Tap the card that matches the sound."
+                   Style="{StaticResource BodyMd}" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Choices}" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"
+                                 HorizontalItemSpacing="16" VerticalItemSpacing="16" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:ChoiceCardModel">
+                    <!-- 150dp square: DESIGN.md requires 72dp minimum for phonics cards. -->
+                    <Border HeightRequest="150"
+                            BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                            Stroke="{Binding IsSelected, Converter={StaticResource SelectionStroke}}"
+                            StrokeThickness="{Binding IsSelected, Converter={StaticResource SelectionThickness}}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MatchingGameViewModel}}, Path=SelectCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Grapheme}" Style="{StaticResource PhonicsFocus}"
+                               FontSize="52" TextColor="{StaticResource Primary}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <controls:TactileButton Grid.Row="2" Text="Submit"
+                                BackgroundFill="{StaticResource Primary}"
+                                DepthColor="{StaticResource OnPrimaryFixed}"
+                                TextColor="{StaticResource OnPrimary}"
+                                CornerRadius="28"
+                                IsEnabled="{Binding CanSubmit}"
+                                Command="{Binding SubmitCommand}" />
+    </Grid>
 </ContentPage>

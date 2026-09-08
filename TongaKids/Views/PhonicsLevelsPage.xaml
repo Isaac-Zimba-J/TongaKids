@@ -1,8 +1,85 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.PhonicsLevelsPage"
-             Shell.NavBarIsVisible="False">
-    <Label Text="Phonics Levels" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+             x:DataType="vm:PhonicsLevelsViewModel"
+             Title="Phonics Levels">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="24">
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="{Binding Greeting}" Style="{StaticResource TitleLg}"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="Let's continue your phonics journey today."
+                       Style="{StaticResource BodyMd}" HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+            <CollectionView ItemsSource="{Binding Levels}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LevelCardModel">
+                        <Border Style="{StaticResource Card}"
+                                Opacity="{Binding IsLocked, Converter={StaticResource LockedOpacity}}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PhonicsLevelsViewModel}}, Path=OpenCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+
+                            <VerticalStackLayout Spacing="12">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Border Grid.Column="0" WidthRequest="56" HeightRequest="56"
+                                            BackgroundColor="{StaticResource PrimaryFixed}"
+                                            StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="16" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding IconGlyph}"
+                                               Style="{StaticResource Icon}" FontSize="28"
+                                               HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+
+                                    <Label Grid.Column="2" Text="lock"
+                                           Style="{StaticResource Icon}" FontSize="32"
+                                           IsVisible="{Binding IsLocked}"
+                                           TextColor="{StaticResource Outline}" />
+                                </Grid>
+
+                                <Label Text="{Binding Title}" Style="{StaticResource TitleLg}" />
+                                <Label Text="{Binding Subtitle}" Style="{StaticResource BodyMd}" />
+
+                                <ProgressBar Progress="{Binding ProgressFraction}"
+                                             Style="{StaticResource PillProgress}"
+                                             IsVisible="{Binding IsCurrent}" />
+
+                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsUnlocked}">
+                                    <Label Grid.Column="0" Text="{Binding ProgressLabel}"
+                                           Style="{StaticResource LabelLg}" VerticalOptions="Center" />
+                                    <controls:TactileButton Grid.Column="1"
+                                        Text="{Binding ActionLabel}"
+                                        BackgroundFill="{StaticResource PrimaryContainer}"
+                                        DepthColor="{StaticResource OnPrimaryContainer}"
+                                        TextColor="{StaticResource OnPrimary}"
+                                        CornerRadius="24"
+                                        IsVisible="{Binding HasLessons}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PhonicsLevelsViewModel}}, Path=OpenCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid>
+
+                                <Label Text="{Binding LockedLabel}" Style="{StaticResource LabelLg}"
+                                       TextColor="{StaticResource Outline}"
+                                       IsVisible="{Binding IsLocked}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

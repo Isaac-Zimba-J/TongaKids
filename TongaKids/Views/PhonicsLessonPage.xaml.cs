@@ -1,9 +1,12 @@
+using TongaKids.ViewModels;
+
 namespace TongaKids.Views;
 
 public partial class PhonicsLessonPage : ContentPage
 {
-    public PhonicsLessonPage()
+    public PhonicsLessonPage(PhonicsLessonViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = viewModel;
     }
 }

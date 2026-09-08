@@ -1,9 +1,12 @@
+using TongaKids.ViewModels;
+
 namespace TongaKids.Views;
 
 public partial class MatchingGamePage : ContentPage
 {
-    public MatchingGamePage()
+    public MatchingGamePage(MatchingGameViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = viewModel;
     }
 }

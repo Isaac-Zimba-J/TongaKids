@@ -1,7 +1,9 @@
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 using TongaKids.Data;
 using TongaKids.Services;
 using TongaKids.Services.SelfCheck;
+using TongaKids.ViewModels;
 using TongaKids.Views;
 
 namespace TongaKids;
@@ -31,11 +33,25 @@ public static class MauiProgram
 
 		// Session is a singleton: one learner at a time, app-wide.
 		builder.Services.AddSingleton<ILearnerSession, LearnerSession>();
+		builder.Services.AddSingleton<IAuthService, AuthService>();
 
 		// Engines. Pure classes with no MAUI or SQLite dependency.
 		builder.Services.AddSingleton<IPhonicsEngine, PhonicsEngine>();
 		builder.Services.AddSingleton<IProgressCalculator, ProgressCalculator>();
 		builder.Services.AddSingleton<IMasteryEvaluator, MasteryEvaluator>();
+
+		// Audio. Silent when a clip has not been recorded yet.
+		builder.Services.AddSingleton(AudioManager.Current);
+		builder.Services.AddSingleton<IAudioService, AudioService>();
+
+		// View models are transient, matching their pages.
+		builder.Services.AddTransient<OnboardingViewModel>();
+		builder.Services.AddTransient<ProfileSelectionViewModel>();
+		builder.Services.AddTransient<HomeViewModel>();
+		builder.Services.AddTransient<PhonicsLevelsViewModel>();
+		builder.Services.AddTransient<PhonicsLessonViewModel>();
+		builder.Services.AddTransient<MatchingGameViewModel>();
+		builder.Services.AddTransient<LessonCompleteViewModel>();
 
 		// Pages are transient so each navigation gets fresh state.
 		builder.Services.AddTransient<SplashPage>();

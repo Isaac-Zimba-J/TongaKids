@@ -37,7 +37,9 @@ public sealed class TongaKidsDatabase : ITongaKidsDatabase
             var connection = new SQLiteAsyncConnection(path, Flags);
 
             // WAL keeps reads fast while progress is being written.
-            await connection.ExecuteAsync("PRAGMA journal_mode=WAL;");
+            // This PRAGMA returns a row ("wal"), so it must be read as a scalar;
+            // ExecuteAsync expects no result and throws "not an error" on it.
+            await connection.ExecuteScalarAsync<string>("PRAGMA journal_mode=WAL;");
 
             await connection.CreateTableAsync<Learner>();
             await connection.CreateTableAsync<Level>();
@@ -45,6 +47,7 @@ public sealed class TongaKidsDatabase : ITongaKidsDatabase
             await connection.CreateTableAsync<PhonicsItem>();
             await connection.CreateTableAsync<LessonProgress>();
             await connection.CreateTableAsync<QuizAttempt>();
+            await connection.CreateTableAsync<GuardianAccount>();
 
             _connection = connection;
             return _connection;

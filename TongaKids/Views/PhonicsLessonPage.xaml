@@ -1,8 +1,95 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:models="clr-namespace:TongaKids.Models"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.PhonicsLessonPage"
-             Shell.NavBarIsVisible="False">
-    <Label Text="Phonics Lesson" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+             x:DataType="vm:PhonicsLessonViewModel"
+             Title="{Binding LessonTitle}">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource ScreenPadding}" RowSpacing="16">
+
+        <ProgressBar Grid.Row="0" Progress="{Binding LessonProgress}"
+                     ProgressColor="{StaticResource Tertiary}"
+                     Style="{StaticResource PillProgress}" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="24">
+
+                <!-- Grapheme card. 240dp tall, far above the 72dp minimum. -->
+                <Border Style="{StaticResource Card}" HeightRequest="240" Padding="24">
+                    <Label Text="{Binding Grapheme}" Style="{StaticResource PhonicsFocus}"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Border WidthRequest="96" HeightRequest="96"
+                            BackgroundColor="{StaticResource TertiaryContainer}"
+                            StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="48" />
+                        </Border.StrokeShape>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PlaySoundCommand}" />
+                        </Border.GestureRecognizers>
+                        <Label Text="volume_up" Style="{StaticResource Icon}" FontSize="44"
+                               TextColor="{StaticResource OnTertiaryContainer}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Label Text="TAP TO HEAR" Style="{StaticResource LabelLg}"
+                           CharacterSpacing="2" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <!-- Example words, shown only when authored -->
+                <VerticalStackLayout IsVisible="{Binding HasExamples}" Spacing="12"
+                                     BindableLayout.ItemsSource="{Binding Examples}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:PhonicsItem">
+                            <Border Style="{StaticResource Card}" Padding="12">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                                    <Border Grid.Column="0" WidthRequest="64" HeightRequest="64"
+                                            BackgroundColor="{StaticResource PrimaryFixed}"
+                                            StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12" />
+                                        </Border.StrokeShape>
+                                        <Image Source="{Binding ImageKey, StringFormat='{0}.png'}"
+                                               Aspect="AspectFill" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding ExampleWord}"
+                                               Style="{StaticResource TitleLg}"
+                                               TextColor="{StaticResource Secondary}" />
+                                        <Label Text="{Binding Gloss}" Style="{StaticResource BodyMd}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="12">
+            <controls:TactileButton Text="Play Game"
+                                    BackgroundFill="{StaticResource PrimaryContainer}"
+                                    DepthColor="{StaticResource OnPrimaryContainer}"
+                                    TextColor="{StaticResource OnPrimary}"
+                                    Command="{Binding PlayGameCommand}" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <controls:TactileButton Grid.Column="0" Text="Previous"
+                                        BackgroundFill="{StaticResource SurfaceContainerLowest}"
+                                        DepthColor="{StaticResource OutlineVariant}"
+                                        TextColor="{StaticResource Secondary}"
+                                        Command="{Binding PreviousCommand}" />
+                <controls:TactileButton Grid.Column="1" Text="Next"
+                                        BackgroundFill="{StaticResource Secondary}"
+                                        DepthColor="{StaticResource OnSecondaryFixedVariant}"
+                                        TextColor="{StaticResource OnSecondary}"
+                                        Command="{Binding NextCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

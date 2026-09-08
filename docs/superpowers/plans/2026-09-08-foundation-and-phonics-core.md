@@ -2330,7 +2330,7 @@ await Shell.Current.GoToAsync("selfcheck");
 
 Run: `dotnet build TongaKids/TongaKids.csproj -f net10.0-android -t:Run`
 
-Expected: **`28 of 28 checks passed`**, every line green.
+Expected: **`31 of 31 checks passed`**, every line green.
 
 Any FAIL line names the case and shows expected versus actual — fix the engine, not the
 assertion, unless the assertion misreads DESIGN.md. Remove the temporary navigation once
@@ -2342,7 +2342,7 @@ the run is green; the page stays reachable from Settings in Plan 3.
 git add -A
 git commit -m "Add in-app self-check harness for the three engines
 
-28 assertion cases covering accuracy rounding, the DESIGN.md star
+31 assertion cases covering accuracy rounding, the DESIGN.md star
 thresholds, words-per-minute, the 80% mastery guard, and minimal-pair
 quiz construction including reproducibility and degenerate input.
 
@@ -4321,7 +4321,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 - [ ] A child can complete the full path: splash → profile → home → level → lesson → game → result.
 - [ ] Mastering a level unlocks the next; scoring below 80% returns to the lesson.
 - [ ] Progress survives an app restart.
-- [ ] The self-check page reports **28 of 28 checks passed**.
+- [ ] The self-check page reports **31 of 31 checks passed**.
 - [ ] No dialog, stack trace, or error code is reachable from any child-facing screen.
 - [ ] The app is fully usable with **zero audio clips recorded**.
 - [ ] `docs/audio-recording-list.md` lists every clip the owner needs to record.

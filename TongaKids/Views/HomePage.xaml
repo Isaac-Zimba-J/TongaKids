@@ -1,8 +1,96 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.HomePage"
+             x:DataType="vm:HomeViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Home" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="24">
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                <Border Grid.Column="0" HeightRequest="56" WidthRequest="56"
+                        StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="28" />
+                    </Border.StrokeShape>
+                    <Image Source="{Binding AvatarKey, StringFormat='{0}.png'}"
+                           Aspect="AspectFill" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="{Binding Greeting}" Style="{StaticResource HeadlineLg}"
+                           TextColor="{StaticResource Primary}" />
+                    <Label Text="{Binding GoalSummary}" Style="{StaticResource LabelLg}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Daily mission: the entry point to phonics -->
+            <Border BackgroundColor="{StaticResource PrimaryContainer}"
+                    StrokeThickness="0" Padding="20">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenPhonicsCommand}" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="8">
+                    <Border BackgroundColor="{StaticResource SurfaceContainerLowest}"
+                            Padding="12,4" HorizontalOptions="Start" StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="24" />
+                        </Border.StrokeShape>
+                        <Label Text="DAILY MISSION" Style="{StaticResource LabelLg}"
+                               TextColor="{StaticResource Primary}" />
+                    </Border>
+                    <Label Text="Learn Phonics" Style="{StaticResource DisplayLg}"
+                           TextColor="{StaticResource OnPrimary}" />
+                    <Label Text="{Binding MissionSubtitle}" Style="{StaticResource BodyLg}"
+                           TextColor="{StaticResource OnPrimary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="16" HeightRequest="200">
+                <Border Grid.Column="0" BackgroundColor="{StaticResource SecondaryContainer}"
+                        StrokeThickness="0" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="End" Spacing="4">
+                        <Label Text="menu_book" Style="{StaticResource Icon}" FontSize="36"
+                               TextColor="{StaticResource OnSecondaryContainer}" />
+                        <Label Text="Story Library" Style="{StaticResource TitleLg}"
+                               TextColor="{StaticResource OnSecondaryContainer}" />
+                        <Label Text="Coming soon" Style="{StaticResource BodyMd}"
+                               TextColor="{StaticResource OnSecondaryContainer}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1" BackgroundColor="{StaticResource TertiaryContainer}"
+                        StrokeThickness="0" Padding="16">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout VerticalOptions="End" Spacing="4">
+                        <Label Text="trophy" Style="{StaticResource Icon}" FontSize="36"
+                               TextColor="{StaticResource OnTertiaryContainer}" />
+                        <Label Text="Reading Challenges" Style="{StaticResource TitleLg}"
+                               TextColor="{StaticResource OnTertiaryContainer}" />
+                        <Label Text="Earn stars!" Style="{StaticResource BodyMd}"
+                               TextColor="{StaticResource OnTertiaryContainer}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="My Progress" Style="{StaticResource TitleLg}" />
+                    <Label Text="See how much you've learned!" Style="{StaticResource BodyMd}" />
+                    <ProgressBar Progress="{Binding GoalProgress}"
+                                 Style="{StaticResource PillProgress}" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
