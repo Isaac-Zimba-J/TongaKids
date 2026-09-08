@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
+using UXDivers.Popups.Maui;
 using TongaKids.Data;
 using TongaKids.Services;
 using TongaKids.Services.SelfCheck;
@@ -15,6 +16,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseUXDiversPopups()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("NunitoSans-Regular.ttf", "NunitoRegular");
@@ -43,6 +45,9 @@ public static class MauiProgram
 		// Audio. Silent when a clip has not been recorded yet.
 		builder.Services.AddSingleton(AudioManager.Current);
 		builder.Services.AddSingleton<IAudioService, AudioService>();
+
+		// Popups and modals, via UXDivers Popups.
+		builder.Services.AddSingleton<IDialogService, DialogService>();
 
 		// View models are transient, matching their pages.
 		builder.Services.AddTransient<OnboardingViewModel>();

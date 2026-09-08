@@ -9,7 +9,8 @@ namespace TongaKids.ViewModels;
 
 public sealed partial class ProfileSelectionViewModel(
     ILearnerRepository learners,
-    ILearnerSession session) : ObservableObject
+    ILearnerSession session,
+    IDialogService dialogs) : ObservableObject
 {
     /// <summary>Avatar art shipped with the app, cycled for new learners.</summary>
     private static readonly string[] AvatarKeys =
@@ -61,14 +62,8 @@ public sealed partial class ProfileSelectionViewModel(
     [RelayCommand]
     private async Task AddAsync()
     {
-        var page = Application.Current?.Windows[0].Page;
-        if (page is null)
-        {
-            return;
-        }
-
-        var name = await page.DisplayPromptAsync(
-            "Add a learner", "What is your name?", "Save", "Cancel", maxLength: 20);
+        var name = await dialogs.PromptAsync(
+            "Add a learner", "What is your name?", "Your name");
 
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -84,5 +79,7 @@ public sealed partial class ProfileSelectionViewModel(
         });
 
         Learners.Add(created);
+
+        await dialogs.ToastAsync($"Welcome, {created.Name}!");
     }
 }

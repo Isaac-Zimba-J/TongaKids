@@ -4,6 +4,9 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:TongaKids.Views"
        Shell.FlyoutBehavior="Disabled"
+       Shell.BackgroundColor="{StaticResource Surface}"
+       Shell.ForegroundColor="{StaticResource Primary}"
+       Shell.TitleColor="{StaticResource Primary}"
        Shell.TabBarBackgroundColor="{StaticResource SurfaceContainerLow}"
        Shell.TabBarForegroundColor="{StaticResource Tertiary}"
        Shell.TabBarUnselectedColor="{StaticResource OnSurfaceVariant}"
@@ -24,13 +27,36 @@
 
     <TabBar Route="main">
         <ShellContent Title="Home" Route="home"
-                      ContentTemplate="{DataTemplate views:HomePage}" />
+                      ContentTemplate="{DataTemplate views:HomePage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="home"
+                                 Color="{StaticResource Tertiary}" Size="28" />
+            </ShellContent.Icon>
+        </ShellContent>
+
         <ShellContent Title="Stories" Route="stories"
-                      ContentTemplate="{DataTemplate views:StoriesPage}" />
+                      ContentTemplate="{DataTemplate views:StoriesPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="menu_book"
+                                 Color="{StaticResource Tertiary}" Size="28" />
+            </ShellContent.Icon>
+        </ShellContent>
+
         <ShellContent Title="Progress" Route="progress"
-                      ContentTemplate="{DataTemplate views:ProgressPage}" />
+                      ContentTemplate="{DataTemplate views:ProgressPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="trending_up"
+                                 Color="{StaticResource Tertiary}" Size="28" />
+            </ShellContent.Icon>
+        </ShellContent>
+
         <ShellContent Title="Settings" Route="settings"
-                      ContentTemplate="{DataTemplate views:SettingsPage}" />
+                      ContentTemplate="{DataTemplate views:SettingsPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="settings"
+                                 Color="{StaticResource Tertiary}" Size="28" />
+            </ShellContent.Icon>
+        </ShellContent>
     </TabBar>
 
 </Shell>
