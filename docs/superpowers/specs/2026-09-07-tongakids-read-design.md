@@ -77,38 +77,53 @@ native accessibility support (TalkBack) for free. Unity would add tens of megaby
 a heavier runtime for no pedagogical gain. §3.4.1 is treated as a stale line in the
 report.
 
-### 3.2 No account registration, no leaderboards
+### 3.2 Registration is in; leaderboards are out
 
-Report §3.4.2 lists user registration by email or phone, password recovery, and
-leaderboards. The approved mockups show something different and better: a child taps
-their own face on a profile-selection screen. There is no login anywhere in the child's
-path.
+Report §3.4.2 lists user registration by email or phone, password recovery, leaderboards,
+and profile management.
 
-**Decision:** follow the mockups.
+**Owner decision (2026-09-08):** registration is **in**. The report is the marked
+document and the demonstrator should show what it promises. Data-protection questions are
+deferred — this is a proof of concept, not a deployment.
 
-Justification, in order of strength:
+**Leaderboards remain out.** They rank children publicly, and for the bottom of the
+distribution — precisely the learners this project exists to reach — a permanent last
+place is demotivating. Report §3.4.2 also lists badges and stars, which motivate without
+ranking children against each other; those are retained in full.
 
-1. **Legal.** The Zambia Data Protection Act 2021 governs children's data. Collecting an
-   email or phone number from a Grade 1 learner creates a personal-data obligation with
-   no pedagogical benefit. Storing nothing is the strongest possible compliance posture.
-2. **Practical.** A six-year-old in Choma cannot type an email address or recover a
-   password. Any credential flow becomes a permanent barrier to the target user.
-3. **Shared devices.** The report assumes children use a parent's phone. Multiple local
-   profiles on one device is the correct model; one account per device is not.
-4. **Pedagogical.** Leaderboards rank children publicly. For the bottom of the
-   distribution — precisely the learners this project exists to reach — a permanent last
-   place is demotivating. Stars, badges and personal progress motivate without ranking
-   children against each other. Report §3.4.2 already lists badges and stars; those are
-   retained in full.
+#### Where registration sits
 
-Parents are still authenticated, by PIN, at the Parental Gateway (UC-05). Authentication
-exists where the report actually needs it: guarding consent and analytics.
+Registration guards the **adult** layer, not the child's path:
 
-**Owner decision (2026-09-08):** approved. Registration and leaderboards are deferred —
-this build is a proof of concept and account infrastructure is not what it needs to
-prove. Note the distinction: the owner deferred them for the demonstrator; the legal and
-pedagogical arguments above are the case for leaving them out permanently. That is a
-separate call, to be made before any pilot deployment.
+1. On first launch, a parent or guardian registers once — name, email or phone, password.
+2. Thereafter the app opens to profile selection, and a child taps their own face exactly
+   as the mockups show.
+
+This satisfies the report's requirement while preserving the approved child experience. A
+six-year-old in Choma cannot type an email address or recover a password; putting a
+credential form in front of the learner would make the app unusable by its target user.
+The guardian account also gives the Parental Gateway (UC-05) a real identity to
+authenticate, which the PIN alone did not.
+
+#### Implementation for the demonstrator
+
+- **Local only.** Credentials are stored in SQLite on the device. There is no auth server,
+  because there is no backend in scope (§14). The registration flow is real and functional;
+  it simply has no remote counterpart yet.
+- **Password storage:** PBKDF2 hash with a per-account salt. Never plaintext, even in a
+  demo — a marker who opens the database should find a hash.
+- **Password recovery:** a security question chosen at registration. Email-based recovery
+  is impossible without a backend to send mail, so a locally verifiable challenge is the
+  honest equivalent.
+
+#### Deferred, not resolved
+
+Storing a guardian's email and a child's name together creates a personal-data record
+governed by the Zambia Data Protection Act 2021. For a local-only demonstrator on a
+development device this is acceptable. **Before any pilot with real children, the
+following must be settled:** whether registration is needed at all when the app has no
+server to authenticate against, what lawful basis covers the data, and how consent is
+obtained and recorded. Tracked as open decision #4.
 
 ---
 
@@ -451,7 +466,8 @@ exist to make it possible; phases 5-7 complete the report's use-case coverage.
 
 | # | Decision | Status |
 |---|---|---|
-| 1 | Departures in §3 (MAUI over Unity; no registration or leaderboards) | **Approved 2026-09-08.** Registration deferred as out of scope for a proof of concept |
+| 1 | MAUI over Unity (§3.1) | **Approved 2026-09-08** |
 | 2 | `git init` and commit the baseline | **Done 2026-09-08**, commit `ec4f511` |
-| 3 | Real `TongaKids.Tests` project instead of the in-app self-check page | Open. Optional, recommended if time allows |
-| 4 | Whether registration stays out permanently, on the legal grounds in §3.2 | Open. Must be settled before any pilot deployment |
+| 3 | Separate `TongaKids.Tests` project | **Declined 2026-09-08** — deadline pressure. Verification is the in-app self-check harness (§12) |
+| 4 | Data-protection basis for storing guardian credentials and child names | **Open.** Deferred for the proof of concept. Must be settled before any pilot |
+| 5 | Registration included (§3.2) | **Approved 2026-09-08.** Guardian-level, local-only |
