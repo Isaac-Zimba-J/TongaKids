@@ -185,8 +185,6 @@ an app update must never touch a child's progress.**
 | `Level` | Id, Number, Title, Subtitle, IconKey, RequiresLevelNumber |
 | `Lesson` | Id, LevelId, Number, Title, Type |
 | `PhonicsItem` | Id, LessonId, Grapheme, AudioKey, ExampleWord, Gloss, ImageKey, SortOrder |
-| `QuizQuestion` | Id, LessonId, Prompt, AudioKey, CorrectItemId |
-| `QuizOption` | Id, QuestionId, PhonicsItemId, SortOrder |
 | `Story` | Id, Title, CoverImageKey, SortOrder |
 | `StoryPage` | Id, StoryId, PageNumber, Text, ImageKey, AudioKey, WordCount |
 
@@ -200,6 +198,11 @@ an app update must never touch a child's progress.**
 | `ReadingSession` | Id, LearnerId, StoryId, WordsRead, DurationMs, StartedAt |
 | `StoryReadState` | LearnerId, StoryId, LastPageRead, IsCompleted |
 | `ParentSettings` | PinHash, PinSalt, ConsentGivenAt, ConsentVersion, AudioEnabled, SyncEnabled |
+
+Quizzes are **generated at runtime** by the PhonicsEngine from `PhonicsItem` rows (§6),
+not stored. An earlier draft of this spec also listed `QuizQuestion` and `QuizOption`
+content tables; that was redundant with engine generation and has been removed. One
+mechanism produces quizzes, not two.
 
 `QuizAttempt` and `ReadingSession` are what make the report's Progress Calculator real.
 Reading accuracy is derived from the first; words-per-minute from the second. Without
