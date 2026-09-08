@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
+using TongaKids.Data;
+using TongaKids.Services;
+using TongaKids.Views;
 
 namespace TongaKids;
 
@@ -17,6 +20,29 @@ public static class MauiProgram
 				fonts.AddFont("NunitoSans-ExtraBold.ttf", "NunitoExtraBold");
 				fonts.AddFont("MaterialSymbolsOutlined.ttf", "MaterialSymbols");
 			});
+
+		// Data layer. Singletons: one connection, opened once, shared.
+		builder.Services.AddSingleton<ITongaKidsDatabase, TongaKidsDatabase>();
+		builder.Services.AddSingleton<ILearnerRepository, LearnerRepository>();
+		builder.Services.AddSingleton<IContentRepository, ContentRepository>();
+		builder.Services.AddSingleton<IProgressRepository, ProgressRepository>();
+		builder.Services.AddSingleton<IContentSeeder, ContentSeeder>();
+
+		// Session is a singleton: one learner at a time, app-wide.
+		builder.Services.AddSingleton<ILearnerSession, LearnerSession>();
+
+		// Pages are transient so each navigation gets fresh state.
+		builder.Services.AddTransient<SplashPage>();
+		builder.Services.AddTransient<OnboardingPage>();
+		builder.Services.AddTransient<ProfileSelectionPage>();
+		builder.Services.AddTransient<HomePage>();
+		builder.Services.AddTransient<StoriesPage>();
+		builder.Services.AddTransient<ProgressPage>();
+		builder.Services.AddTransient<SettingsPage>();
+		builder.Services.AddTransient<PhonicsLevelsPage>();
+		builder.Services.AddTransient<PhonicsLessonPage>();
+		builder.Services.AddTransient<MatchingGamePage>();
+		builder.Services.AddTransient<LessonCompletePage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "levels": [
+    {
+      "id": 1,
+      "number": 1,
+      "title": "Level 1: Vowels",
+      "subtitle": "Learn the sounds of A, E, I, O, U",
+      "iconGlyph": "psychology",
+      "requiresLevelNumber": 0,
+      "lessons": [
+        {
+          "id": 101,
+          "number": 1,
+          "title": "Lesson 1: The Five Vowels",
+          "items": [
+            { "id": 1001, "grapheme": "A", "audioKey": "vowel_a", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 1 },
+            { "id": 1002, "grapheme": "E", "audioKey": "vowel_e", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 2 },
+            { "id": 1003, "grapheme": "I", "audioKey": "vowel_i", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 3 },
+            { "id": 1004, "grapheme": "O", "audioKey": "vowel_o", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 4 },
+            { "id": 1005, "grapheme": "U", "audioKey": "vowel_u", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 5 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "number": 2,
+      "title": "Level 2: Simple Syllables",
+      "subtitle": "Combining letters to make basic sounds.",
+      "iconGlyph": "music_note",
+      "requiresLevelNumber": 1,
+      "lessons": [
+        {
+          "id": 201,
+          "number": 1,
+          "title": "Lesson 1: Ba and Da",
+          "items": [
+            { "id": 2001, "grapheme": "BA", "audioKey": "syl_ba", "exampleWord": "Balu", "gloss": "ball", "imageKey": "word_ball", "sortOrder": 1 },
+            { "id": 2002, "grapheme": "DA", "audioKey": "syl_da", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 2 }
+          ]
+        },
+        {
+          "id": 202,
+          "number": 2,
+          "title": "Lesson 2: Syllables",
+          "items": [
+            { "id": 2003, "grapheme": "MA", "audioKey": "syl_ma", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 1 },
+            { "id": 2004, "grapheme": "PA", "audioKey": "syl_pa", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "number": 3,
+      "title": "Level 3: Word Building",
+      "subtitle": "Mastering short words and structures.",
+      "iconGlyph": "extension",
+      "requiresLevelNumber": 2,
+      "lessons": []
+    },
+    {
+      "id": 4,
+      "number": 4,
+      "title": "Level 4: Sentence Reading",
+      "subtitle": "Reading your first Tonga sentences.",
+      "iconGlyph": "menu_book",
+      "requiresLevelNumber": 3,
+      "lessons": []
+    }
+  ]
+}

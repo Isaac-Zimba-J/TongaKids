@@ -1,0 +1,9 @@
+namespace TongaKids.Views;
+
+public partial class SettingsPage : ContentPage
+{
+    public SettingsPage()
+    {
+        InitializeComponent();
+    }
+}
