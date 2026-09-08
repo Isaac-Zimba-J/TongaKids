@@ -6,7 +6,7 @@
 
 **Architecture:** Continues Plan 1 unchanged. Same single MAUI project, same `Views → ViewModels → Services → Data` direction, same design tokens. This plan adds one new service (`IAuthService`), extends the content pack with stories, and adds nine screens.
 
-**Tech Stack:** As Plan 1. No new NuGet packages.
+**Tech Stack:** As Plan 1 (`CommunityToolkit.Mvvm`, `sqlite-net-pcl`, `Plugin.Maui.Audio`). No new NuGet packages.
 
 **Spec:** `docs/superpowers/specs/2026-09-07-tongakids-read-design.md`
 

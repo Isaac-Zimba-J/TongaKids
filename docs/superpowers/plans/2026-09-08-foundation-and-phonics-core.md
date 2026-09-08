@@ -16,7 +16,7 @@ Plan 2 covers UC-02 (Stories). Plan 3 covers UC-04 to UC-07 plus hardening.
 ## Global Constraints
 
 - Target framework for all verification: `net10.0-android`. Minimum Android API 21.
-- Exactly three new NuGet packages. Do not add a fourth without asking — the spec commits to low-specification devices.
+- Exactly three new NuGet packages: `CommunityToolkit.Mvvm`, `sqlite-net-pcl`, `Plugin.Maui.Audio`. Do not add a fourth without asking — the spec commits to low-specification devices. In particular do not add `SQLitePCLRaw.bundle_green`; see Task 1 Step 3.
 - **No network call may exist on any code path a child can reach.** No analytics, no crash reporter, no runtime font or image fetch.
 - All colours come from `Resources/Styles/Colors.xaml`. **Never write a hex literal in a page or control.**
 - All text styles come from `Resources/Styles/Typography.xaml`. Minimum font weight 400.
@@ -153,15 +153,26 @@ In `TongaKids/TongaKids.csproj`, inside the existing `<ItemGroup>` that already 
 `Microsoft.Maui.Controls`, add:
 
 ```xml
-<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
-<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+<PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
 <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
 ```
 
-`SQLitePCLRaw.bundle_green` is the native provider that `sqlite-net-pcl` needs at
-runtime; without it every database call throws on Android. It counts as part of the
-SQLite dependency, not a fourth package.
+**Three packages, not four.** Older guidance (including an earlier draft of this plan)
+says to add `SQLitePCLRaw.bundle_green` as the native provider. Do **not**. As of
+`sqlite-net-pcl` 1.11.285 it already brings `SQLitePCLRaw.core` 3.0.3,
+`provider.e_sqlite3` 3.0.3 and `SourceGear.sqlite3` 3.53.3. Adding `bundle_green` 2.1.11
+on top drags the *older* 2.1.11 native libraries back in, which:
+
+1. trips `NU1903` — `SQLitePCLRaw.lib.e_sqlite3` 2.1.11 carries a known **high severity**
+   advisory (GHSA-2m69-gcr7-jv3q), and
+2. trips `XA4301` — two copies of `libe_sqlite3.so` land in the APK and one is discarded.
+
+Verify with `dotnet list package --include-transitive` if the build ever warns about
+SQLite again.
+
+Versions above were checked against nuget.org rather than assumed; bump them only after
+re-checking, since a newer `sqlite-net-pcl` may change what it brings with it.
 
 - [ ] **Step 4: Stop the template shipping the sample bot image**
 
@@ -567,8 +578,8 @@ public class TactileButton : ContentView
         }
 
         // Press: drop the face onto the plinth. Release: spring back.
-        await _face.TranslateTo(0, DepthPixels, 60, Easing.CubicOut);
-        await _face.TranslateTo(0, 0, 90, Easing.CubicOut);
+        await _face.TranslateToAsync(0, DepthPixels, 60, Easing.CubicOut);
+        await _face.TranslateToAsync(0, 0, 90, Easing.CubicOut);
 
         if (Command?.CanExecute(CommandParameter) == true)
         {

@@ -1,44 +1,67 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
+    <!-- Primary — Warm Orange. Main actions, phonics highlights. -->
+    <Color x:Key="Primary">#914c00</Color>
+    <Color x:Key="OnPrimary">#ffffff</Color>
+    <Color x:Key="PrimaryContainer">#ff8a00</Color>
+    <Color x:Key="OnPrimaryContainer">#613100</Color>
+    <Color x:Key="InversePrimary">#ffb77f</Color>
+    <Color x:Key="PrimaryFixed">#ffdcc4</Color>
+    <Color x:Key="PrimaryFixedDim">#ffb77f</Color>
+    <Color x:Key="OnPrimaryFixed">#2f1500</Color>
+    <Color x:Key="OnPrimaryFixedVariant">#6f3900</Color>
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <!-- Secondary — Sky Blue. Secondary navigation, information. -->
+    <Color x:Key="Secondary">#006688</Color>
+    <Color x:Key="OnSecondary">#ffffff</Color>
+    <Color x:Key="SecondaryContainer">#58cafe</Color>
+    <Color x:Key="OnSecondaryContainer">#005370</Color>
+    <Color x:Key="SecondaryFixed">#c2e8ff</Color>
+    <Color x:Key="SecondaryFixedDim">#75d1ff</Color>
+    <Color x:Key="OnSecondaryFixed">#001e2b</Color>
+    <Color x:Key="OnSecondaryFixedVariant">#004d67</Color>
 
-    <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
-    <Color x:Key="Magenta">#D600AA</Color>
-    <Color x:Key="MidnightBlue">#190649</Color>
-    <Color x:Key="OffBlack">#1f1f1f</Color>
+    <!-- Tertiary — Leaf Green. Progress, success, nature. -->
+    <Color x:Key="Tertiary">#006e1c</Color>
+    <Color x:Key="OnTertiary">#ffffff</Color>
+    <Color x:Key="TertiaryContainer">#5abd5c</Color>
+    <Color x:Key="OnTertiaryContainer">#00480f</Color>
+    <Color x:Key="TertiaryFixed">#94f990</Color>
+    <Color x:Key="TertiaryFixedDim">#78dc77</Color>
+    <Color x:Key="OnTertiaryFixed">#002204</Color>
+    <Color x:Key="OnTertiaryFixedVariant">#005313</Color>
 
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
-    <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
-    <Color x:Key="Gray900">#212121</Color>
-    <Color x:Key="Gray950">#141414</Color>
+    <!-- Error -->
+    <Color x:Key="Error">#ba1a1a</Color>
+    <Color x:Key="OnError">#ffffff</Color>
+    <Color x:Key="ErrorContainer">#ffdad6</Color>
+    <Color x:Key="OnErrorContainer">#93000a</Color>
 
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
-    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
-    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
-    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
-    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+    <!-- Surfaces — Soft Cream, warmer than white to reduce eye strain. -->
+    <Color x:Key="Surface">#fbf9f8</Color>
+    <Color x:Key="SurfaceDim">#dcd9d9</Color>
+    <Color x:Key="SurfaceBright">#fbf9f8</Color>
+    <Color x:Key="SurfaceContainerLowest">#ffffff</Color>
+    <Color x:Key="SurfaceContainerLow">#f6f3f2</Color>
+    <Color x:Key="SurfaceContainer">#f0eded</Color>
+    <Color x:Key="SurfaceContainerHigh">#eae8e7</Color>
+    <Color x:Key="SurfaceContainerHighest">#e4e2e1</Color>
+    <Color x:Key="SurfaceVariant">#e4e2e1</Color>
+    <Color x:Key="SurfaceTint">#914c00</Color>
+    <Color x:Key="OnSurface">#1b1c1c</Color>
+    <Color x:Key="OnSurfaceVariant">#564334</Color>
+    <Color x:Key="InverseSurface">#303030</Color>
+    <Color x:Key="InverseOnSurface">#f3f0f0</Color>
+    <Color x:Key="Background">#fbf9f8</Color>
+    <Color x:Key="OnBackground">#1b1c1c</Color>
 
-    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
-    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
-    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
-    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
-    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
-    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
-    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
-    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+    <!-- Outlines -->
+    <Color x:Key="Outline">#8a7362</Color>
+    <Color x:Key="OutlineVariant">#ddc1ae</Color>
+
+    <!-- Level 1 card border. DESIGN.md "Elevation & Depth", prose not token list. -->
+    <Color x:Key="CardBorder">#e0d8c3</Color>
+
 </ResourceDictionary>
