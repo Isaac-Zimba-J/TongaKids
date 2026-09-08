@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using TongaKids.Data;
 using TongaKids.Services;
+using TongaKids.Services.SelfCheck;
 using TongaKids.Views;
 
 namespace TongaKids;
@@ -31,6 +32,11 @@ public static class MauiProgram
 		// Session is a singleton: one learner at a time, app-wide.
 		builder.Services.AddSingleton<ILearnerSession, LearnerSession>();
 
+		// Engines. Pure classes with no MAUI or SQLite dependency.
+		builder.Services.AddSingleton<IPhonicsEngine, PhonicsEngine>();
+		builder.Services.AddSingleton<IProgressCalculator, ProgressCalculator>();
+		builder.Services.AddSingleton<IMasteryEvaluator, MasteryEvaluator>();
+
 		// Pages are transient so each navigation gets fresh state.
 		builder.Services.AddTransient<SplashPage>();
 		builder.Services.AddTransient<OnboardingPage>();
@@ -45,6 +51,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<LessonCompletePage>();
 
 #if DEBUG
+		builder.Services.AddSingleton<ISelfCheck, ProgressSelfCheck>();
+		builder.Services.AddSingleton<ISelfCheck, PhonicsEngineSelfCheck>();
+		builder.Services.AddTransient<SelfCheckPage>();
 		builder.Logging.AddDebug();
 #endif
 

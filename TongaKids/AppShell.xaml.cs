@@ -13,5 +13,9 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("lesson", typeof(PhonicsLessonPage));
         Routing.RegisterRoute("game", typeof(MatchingGamePage));
         Routing.RegisterRoute("complete", typeof(LessonCompletePage));
+
+#if DEBUG
+        Routing.RegisterRoute("selfcheck", typeof(SelfCheckPage));
+#endif
     }
 }
