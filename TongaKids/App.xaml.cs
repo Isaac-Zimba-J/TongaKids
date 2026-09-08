@@ -51,6 +51,7 @@ public partial class App : Application
         {
             System.Diagnostics.Debug.WriteLine($"[SelfCheck] harness failed: {ex}");
         }
+
 #endif
     }
 }

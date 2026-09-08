@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Re-themes UXDivers Popups for the TongaKids light palette.
+
+  The library ships only a DarkTheme, and PopupStyles consumes its keys, so
+  DarkTheme must be merged for the lookups to resolve at all. This dictionary
+  is merged last and overrides the colours and fonts with DESIGN.md tokens,
+  giving light popups in the app's own palette.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:uxd="clr-namespace:UXDivers.Popups.Maui.Controls;assembly=UXDivers.Popups.Maui">
+
+    <!-- Popup surface: white card on a dimmed backdrop. -->
+    <Color x:Key="PopupBorderColor">#ffffff</Color>
+    <Color x:Key="PopupBackdropColor">#99000000</Color>
+
+    <!-- Text on that surface must be dark, not the dark theme's white. -->
+    <Color x:Key="TextColor">#1b1c1c</Color>
+    <Color x:Key="TextSecondaryColor">#564334</Color>
+    <Color x:Key="TextTertiaryColor">#8a7362</Color>
+
+    <!-- Match the app's typography and icon font. -->
+    <x:String x:Key="AppFontFamily">NunitoRegular</x:String>
+    <x:String x:Key="AppSemiBoldFamily">NunitoBold</x:String>
+    <x:String x:Key="IconsFontFamily">MaterialSymbols</x:String>
+
+    <!-- Material Symbols ligatures, since IconsFontFamily is now MaterialSymbols. -->
+    <x:String x:Key="UXDPopupsCloseIconButton">close</x:String>
+    <x:String x:Key="UXDPopupsCheckCircleIconButton">check_circle</x:String>
+
+
+    <!--
+      Replaces the library's action button styles outright. Theirs bind colour
+      through DynamicResource keys internal to the dark theme; these use
+      DESIGN.md tokens. HeightRequest and Padding match the originals so the
+      popup's layout is unchanged.
+    -->
+    <Style x:Key="PrimaryActionButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryContainer}" />
+        <Setter Property="TextColor" Value="{StaticResource OnPrimary}" />
+        <Setter Property="FontFamily" Value="NunitoBold" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="HeightRequest" Value="54" />
+        <Setter Property="Padding" Value="24,0" />
+    </Style>
+
+    <Style x:Key="SecondaryActionButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource SurfaceContainerLow}" />
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+        <Setter Property="FontFamily" Value="NunitoBold" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="HeightRequest" Value="54" />
+        <Setter Property="Padding" Value="24,0" />
+    </Style>
+
+
+    <!--
+      The library's default form field is a dark pill from its dark theme. This
+      template puts the input on a light surface with an 8px radius, per the
+      DESIGN.md input rule. Value binds TwoWay so the popup can read it back.
+    -->
+    <DataTemplate x:Key="TongaKidsFormFieldTemplate" x:DataType="uxd:FormField">
+        <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                Stroke="{StaticResource OutlineVariant}"
+                StrokeThickness="1"
+                Padding="12,2"
+                Margin="0,4">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+            <Entry Text="{Binding Value, Mode=TwoWay}"
+                   Placeholder="{Binding Placeholder}"
+                   IsPassword="{Binding IsPassword}"
+                   FontFamily="NunitoRegular"
+                   FontSize="18"
+                   HeightRequest="52"
+                   TextColor="{StaticResource OnSurface}"
+                   PlaceholderColor="{StaticResource Outline}"
+                   BackgroundColor="Transparent" />
+        </Border>
+    </DataTemplate>
+
+</ResourceDictionary>

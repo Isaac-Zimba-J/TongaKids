@@ -19,7 +19,7 @@ public sealed class DialogService : IDialogService
 
     public async Task ToastAsync(string title)
     {
-        await IPopupService.Current.PushAsync(new Toast { Title = title });
+        await IPopupService.Current.PushAsync(new TongaToast(title));
     }
 
     public async Task AlertAsync(string title, string message, string acceptText = "OK")
@@ -59,13 +59,58 @@ internal sealed class PromptPopup : FormPopup
             SetResult([_field.Value]);
             await IPopupService.Current.PopAsync(this);
         });
+
+        ApplyTongaKidsSurface();
+
+        if (Application.Current?.Resources
+                .TryGetValue("TongaKidsFormFieldTemplate", out var template) == true
+            && template is DataTemplate fieldTemplate)
+        {
+            ItemDataTemplate = fieldTemplate;
+        }
     }
+
+    /// <summary>
+    /// Paints the popup in the app's own palette. The library ships only a dark
+    /// theme, and its card background comes from an internal key, so the surface
+    /// is set directly here where it is fully under our control.
+    /// </summary>
+    private void ApplyTongaKidsSurface()
+    {
+        PopupBackground = new SolidColorBrush(Color.FromArgb("#ffffff"));
+        PopupBorderBrush = new SolidColorBrush(Color.FromArgb("#e0d8c3"));
+        PopupBorderThickness = 1;
+        PopupCornerRadius = new CornerRadius(16);
+    }
+
 
     public override Task OnPopupClosedAsync(PopupEventArgs e)
     {
         // No-op when the action button already supplied a value.
         _completion.TrySetResult(null);
         return base.OnPopupClosedAsync(e);
+    }
+}
+
+/// <summary>
+/// A brief confirmation in the app's palette. Unlike the library default this
+/// paints no backdrop and lets touches through, because a toast is not modal.
+/// </summary>
+internal sealed class TongaToast : Toast
+{
+    public TongaToast(string title)
+    {
+        Title = title;
+
+        PopupBackground = new SolidColorBrush(Color.FromArgb("#ffffff"));
+        PopupBorderBrush = new SolidColorBrush(Color.FromArgb("#e0d8c3"));
+        PopupBorderThickness = 1;
+        PopupCornerRadius = new CornerRadius(24);
+
+        // No dimming, and taps continue through to the page beneath.
+        BackgroundColor = Colors.Transparent;
+        BackgroundInputTransparent = true;
+        CloseWhenBackgroundIsClicked = false;
     }
 }
 
@@ -80,7 +125,22 @@ internal sealed class AlertPopup : SimpleTextPopup
     {
         Title = title;
         Text = message;
+        ApplyTongaKidsSurface();
     }
+
+    /// <summary>
+    /// Paints the popup in the app's own palette. The library ships only a dark
+    /// theme, and its card background comes from an internal key, so the surface
+    /// is set directly here where it is fully under our control.
+    /// </summary>
+    private void ApplyTongaKidsSurface()
+    {
+        PopupBackground = new SolidColorBrush(Color.FromArgb("#ffffff"));
+        PopupBorderBrush = new SolidColorBrush(Color.FromArgb("#e0d8c3"));
+        PopupBorderThickness = 1;
+        PopupCornerRadius = new CornerRadius(16);
+    }
+
 
     public override Task OnPopupClosedAsync(PopupEventArgs e)
     {
