@@ -1,6 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true"></application>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.INTERNET" />
+
+  <!--
+    allowBackup is false deliberately. With it on, Android copies the SQLite
+    database and preferences into the user's Google Drive, which would carry a
+    child's name, scores and reading times off the device. That contradicts both
+    the consent screen ("kept on this device only") and spec section 11.
+
+    dataExtractionRules covers the Android 12+ equivalents: cloud backup and
+    device-to-device transfer are both refused.
+
+    No INTERNET permission: nothing in the app makes a network call. The debug
+    build adds it back through AndroidManifestOverlay.Debug.xml, because the
+    .NET debugger needs a TCP socket to attach.
+  -->
+  <application android:allowBackup="false"
+               android:fullBackupContent="false"
+               android:dataExtractionRules="@xml/data_extraction_rules"
+               android:icon="@mipmap/appicon"
+               android:roundIcon="@mipmap/appicon_round"
+               android:supportsRtl="true" />
+
 </manifest>

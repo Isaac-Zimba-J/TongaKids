@@ -4,9 +4,17 @@ namespace TongaKids.Views;
 
 public partial class SplashPage : ContentPage
 {
-    public SplashPage()
+    private readonly IAuthService _auth;
+
+    /// <summary>
+    /// IAuthService is injected rather than resolved from Handler.MauiContext,
+    /// which is not yet populated during OnAppearing. Resolving it there returned
+    /// null and silently routed past registration.
+    /// </summary>
+    public SplashPage(IAuthService auth)
     {
         InitializeComponent();
+        _auth = auth;
     }
 
     protected override async void OnAppearing()
@@ -23,14 +31,7 @@ public partial class SplashPage : ContentPage
 
         // A guardian registers once; thereafter they sign in, then a child
         // picks a face. No credential field ever appears in the child's path.
-        var auth = Handler?.MauiContext?.Services.GetService<IAuthService>();
-        if (auth is null)
-        {
-            await Shell.Current.GoToAsync("//profiles");
-            return;
-        }
-
-        var registered = await auth.IsRegisteredAsync();
+        var registered = await _auth.IsRegisteredAsync();
         await Shell.Current.GoToAsync(registered ? "//signin" : "//register");
     }
 }

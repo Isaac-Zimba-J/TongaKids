@@ -40,6 +40,28 @@
         <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
     </Style>
 
+    <!--
+      Entries need explicit colours. The template's Styles.xaml supplied these and
+      was replaced wholesale, after which text rendered in the platform default
+      colour and was invisible against the white card.
+    -->
+    <Style TargetType="Entry">
+        <Setter Property="FontFamily" Value="NunitoRegular" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="{StaticResource OnSurface}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Outline}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="MinimumHeightRequest" Value="48" />
+    </Style>
+
+    <Style TargetType="Editor">
+        <Setter Property="FontFamily" Value="NunitoRegular" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="{StaticResource OnSurface}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Outline}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
     <Style TargetType="Label">
         <Setter Property="FontFamily" Value="NunitoRegular" />
         <Setter Property="TextColor" Value="{StaticResource OnSurface}" />

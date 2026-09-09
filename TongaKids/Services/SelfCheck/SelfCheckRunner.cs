@@ -11,7 +11,7 @@ public static class SelfCheckRunner
     /// <paramref name="report"/> is called once per area with a null result to
     /// mark a heading, then once per assertion.
     /// </summary>
-    public static (int Passed, int Total) Run(
+    public static async Task<(int Passed, int Total)> RunAsync(
         IEnumerable<ISelfCheck> checks,
         Action<string, SelfCheckResult?>? report = null)
     {
@@ -22,7 +22,17 @@ public static class SelfCheckRunner
         {
             report?.Invoke(check.Area, null);
 
-            foreach (var result in check.Run())
+            IReadOnlyList<SelfCheckResult> results;
+            try
+            {
+                results = await check.RunAsync();
+            }
+            catch (Exception ex)
+            {
+                results = [new SelfCheckResult($"{check.Area} threw", false, ex.Message)];
+            }
+
+            foreach (var result in results)
             {
                 total++;
                 if (result.Passed)

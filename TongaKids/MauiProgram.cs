@@ -97,6 +97,25 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
+		// Android draws a Material underline under every EditText, tinted with the
+		// platform accent, which is not part of DESIGN.md. Our entries sit inside
+		// their own bordered card, so the underline is removed globally.
+		Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(
+			"TongaKidsNoUnderline", (handler, view) =>
+			{
+#if ANDROID
+				handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#endif
+			});
+
+		Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping(
+			"TongaKidsNoUnderline", (handler, view) =>
+			{
+#if ANDROID
+				handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#endif
+			});
+
 		return builder.Build();
 	}
 }

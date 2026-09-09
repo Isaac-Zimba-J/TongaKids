@@ -9,15 +9,10 @@ public sealed class PhonicsEngineSelfCheck(IPhonicsEngine engine) : ISelfCheck
     private static PhonicsItem Item(int id, string grapheme) =>
         new() { Id = id, Grapheme = grapheme, LessonId = 1, SortOrder = id };
 
-    public IReadOnlyList<SelfCheckResult> Run()
+    public Task<IReadOnlyList<SelfCheckResult>> RunAsync()
     {
-        var results = new List<SelfCheckResult>();
-
-        void Check(string name, object expected, object actual) =>
-            results.Add(new SelfCheckResult(
-                name,
-                Equals(expected, actual),
-                $"expected {expected}, got {actual}"));
+        var c = new SelfCheckCollector();
+        void Check(string name, object expected, object actual) => c.Check(name, expected, actual);
 
         // Minimal-pair scoring
         Check("BA vs DA is a minimal pair", 2, PhonicsEngine.MinimalPairScore("BA", "DA"));
@@ -54,6 +49,6 @@ public sealed class PhonicsEngineSelfCheck(IPhonicsEngine engine) : ISelfCheck
         Check("a pool smaller than optionCount still works", 2,
             engine.BuildQuiz(lesson, [target, Item(2, "DA")], 4, 1)[0].Options.Count);
 
-        return results;
+        return Task.FromResult(c.Results);
     }
 }

@@ -1,37 +1,29 @@
 namespace TongaKids.Services.SelfCheck;
 
 /// <summary>
-/// Exercises the credential paths that must never pass. Runs against the real
-/// database, so it asserts only on rejection cases, which are safe whether or
-/// not a guardian has registered on this device.
+/// Exercises the credential paths that must never pass. Fully async: these hit
+/// the database, and blocking on them from the UI thread deadlocks.
 /// </summary>
 public sealed class AuthSelfCheck(IAuthService auth) : ISelfCheck
 {
     public string Area => "Guardian authentication";
 
-    public IReadOnlyList<SelfCheckResult> Run()
+    public async Task<IReadOnlyList<SelfCheckResult>> RunAsync()
     {
-        var results = new List<SelfCheckResult>();
+        var c = new SelfCheckCollector();
 
-        void Check(string name, object expected, object actual) =>
-            results.Add(new SelfCheckResult(
-                name, Equals(expected, actual), $"expected {expected}, got {actual}"));
+        c.Check("a wrong password is rejected", false,
+            await auth.SignInAsync("anyone", "definitely-not-the-password"));
 
-        Check("a wrong password is rejected", false,
-            auth.SignInAsync("anyone", "definitely-not-the-password").GetAwaiter().GetResult());
+        c.Check("a wrong security answer is rejected", false,
+            await auth.ResetPasswordAsync("anyone", "not-the-answer", "newpass123"));
 
-        Check("a wrong security answer is rejected", false,
-            auth.ResetPasswordAsync("anyone", "not-the-answer", "newpass123")
-                .GetAwaiter().GetResult());
+        c.Check("an empty password cannot register", false,
+            await auth.RegisterAsync("Test", "test@example.com", "", "answer"));
 
-        Check("an empty password cannot register", false,
-            auth.RegisterAsync("Test", "test@example.com", "", "answer")
-                .GetAwaiter().GetResult());
+        c.Check("an empty contact cannot register", false,
+            await auth.RegisterAsync("Test", "", "password123", "answer"));
 
-        Check("an empty contact cannot register", false,
-            auth.RegisterAsync("Test", "", "password123", "answer")
-                .GetAwaiter().GetResult());
-
-        return results;
+        return c.Results;
     }
 }

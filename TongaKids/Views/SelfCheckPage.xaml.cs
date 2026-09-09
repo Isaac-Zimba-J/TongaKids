@@ -7,11 +7,29 @@ public partial class SelfCheckPage : ContentPage
     private static readonly Color PassColor = Color.FromArgb("#006e1c");
     private static readonly Color FailColor = Color.FromArgb("#ba1a1a");
 
+    private readonly IEnumerable<ISelfCheck> _checks;
+    private bool _hasRun;
+
     public SelfCheckPage(IEnumerable<ISelfCheck> checks)
     {
         InitializeComponent();
+        _checks = checks;
+    }
 
-        var (passed, total) = SelfCheckRunner.Run(checks, (area, result) =>
+    // Runs here rather than in the constructor: the checks are async, and
+    // blocking on them while constructing the page would deadlock the UI thread.
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_hasRun)
+        {
+            return;
+        }
+
+        _hasRun = true;
+
+        var (passed, total) = await SelfCheckRunner.RunAsync(_checks, (area, result) =>
         {
             if (result is null)
             {

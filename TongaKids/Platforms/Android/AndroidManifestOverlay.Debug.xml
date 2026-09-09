@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Debug only. The .NET debugger attaches over a TCP socket, and Android requires
+  INTERNET permission for any socket, including one to localhost. Release builds
+  ship without it.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

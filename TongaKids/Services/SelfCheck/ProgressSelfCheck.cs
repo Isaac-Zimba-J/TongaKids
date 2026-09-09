@@ -6,15 +6,10 @@ public sealed class ProgressSelfCheck(
 {
     public string Area => "Progress and mastery";
 
-    public IReadOnlyList<SelfCheckResult> Run()
+    public Task<IReadOnlyList<SelfCheckResult>> RunAsync()
     {
-        var results = new List<SelfCheckResult>();
-
-        void Check(string name, object expected, object actual) =>
-            results.Add(new SelfCheckResult(
-                name,
-                Equals(expected, actual),
-                $"expected {expected}, got {actual}"));
+        var c = new SelfCheckCollector();
+        void Check(string name, object expected, object actual) => c.Check(name, expected, actual);
 
         // Accuracy
         Check("8 of 10 is 80%", 80, calculator.AccuracyPercent(8, 10));
@@ -42,6 +37,6 @@ public sealed class ProgressSelfCheck(
         Check("100% is mastered", MasteryOutcome.Mastered, evaluator.Evaluate(100));
         Check("0% needs remediation", MasteryOutcome.NeedsRemediation, evaluator.Evaluate(0));
 
-        return results;
+        return Task.FromResult(c.Results);
     }
 }

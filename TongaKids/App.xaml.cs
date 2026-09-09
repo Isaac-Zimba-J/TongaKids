@@ -38,7 +38,7 @@ public partial class App : Application
         // depend on someone reading the diagnostic page.
         try
         {
-            var (passed, total) = SelfCheckRunner.Run(_selfChecks, (area, result) =>
+            var (passed, total) = await SelfCheckRunner.RunAsync(_selfChecks, (area, result) =>
             {
                 if (result is { Passed: false })
                 {
