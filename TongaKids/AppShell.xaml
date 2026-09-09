@@ -21,6 +21,14 @@
                   ContentTemplate="{DataTemplate views:OnboardingPage}"
                   Shell.TabBarIsVisible="False" />
 
+    <ShellContent Route="register"
+                  ContentTemplate="{DataTemplate views:RegisterPage}"
+                  Shell.TabBarIsVisible="False" />
+
+    <ShellContent Route="signin"
+                  ContentTemplate="{DataTemplate views:SignInPage}"
+                  Shell.TabBarIsVisible="False" />
+
     <ShellContent Route="profiles"
                   ContentTemplate="{DataTemplate views:ProfileSelectionPage}"
                   Shell.TabBarIsVisible="False" />

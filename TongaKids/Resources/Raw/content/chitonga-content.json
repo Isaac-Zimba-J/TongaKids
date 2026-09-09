@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "levels": [
     {
       "id": 1,
@@ -14,11 +14,51 @@
           "number": 1,
           "title": "Lesson 1: The Five Vowels",
           "items": [
-            { "id": 1001, "grapheme": "A", "audioKey": "vowel_a", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 1 },
-            { "id": 1002, "grapheme": "E", "audioKey": "vowel_e", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 2 },
-            { "id": 1003, "grapheme": "I", "audioKey": "vowel_i", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 3 },
-            { "id": 1004, "grapheme": "O", "audioKey": "vowel_o", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 4 },
-            { "id": 1005, "grapheme": "U", "audioKey": "vowel_u", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 5 }
+            {
+              "id": 1001,
+              "grapheme": "A",
+              "audioKey": "vowel_a",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 1
+            },
+            {
+              "id": 1002,
+              "grapheme": "E",
+              "audioKey": "vowel_e",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 2
+            },
+            {
+              "id": 1003,
+              "grapheme": "I",
+              "audioKey": "vowel_i",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 3
+            },
+            {
+              "id": 1004,
+              "grapheme": "O",
+              "audioKey": "vowel_o",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 4
+            },
+            {
+              "id": 1005,
+              "grapheme": "U",
+              "audioKey": "vowel_u",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 5
+            }
           ]
         }
       ]
@@ -36,8 +76,24 @@
           "number": 1,
           "title": "Lesson 1: Ba and Da",
           "items": [
-            { "id": 2001, "grapheme": "BA", "audioKey": "syl_ba", "exampleWord": "Balu", "gloss": "ball", "imageKey": "word_ball", "sortOrder": 1 },
-            { "id": 2002, "grapheme": "DA", "audioKey": "syl_da", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 2 }
+            {
+              "id": 2001,
+              "grapheme": "BA",
+              "audioKey": "syl_ba",
+              "exampleWord": "Balu",
+              "gloss": "ball",
+              "imageKey": "word_ball",
+              "sortOrder": 1
+            },
+            {
+              "id": 2002,
+              "grapheme": "DA",
+              "audioKey": "syl_da",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 2
+            }
           ]
         },
         {
@@ -45,8 +101,24 @@
           "number": 2,
           "title": "Lesson 2: Syllables",
           "items": [
-            { "id": 2003, "grapheme": "MA", "audioKey": "syl_ma", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 1 },
-            { "id": 2004, "grapheme": "PA", "audioKey": "syl_pa", "exampleWord": "", "gloss": "", "imageKey": "", "sortOrder": 2 }
+            {
+              "id": 2003,
+              "grapheme": "MA",
+              "audioKey": "syl_ma",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 1
+            },
+            {
+              "id": 2004,
+              "grapheme": "PA",
+              "audioKey": "syl_pa",
+              "exampleWord": "",
+              "gloss": "",
+              "imageKey": "",
+              "sortOrder": 2
+            }
           ]
         }
       ]
@@ -68,6 +140,80 @@
       "iconGlyph": "menu_book",
       "requiresLevelNumber": 3,
       "lessons": []
+    }
+  ],
+  "stories": [
+    {
+      "id": 1,
+      "title": "Sulwe a Fulwe",
+      "coverImageKey": "illus_lion_reading",
+      "sortOrder": 1,
+      "pages": [
+        {
+          "id": 101,
+          "pageNumber": 1,
+          "text": "PLACEHOLDER - replace with Chitonga. Long ago, Hare and Tortoise lived beside the great river.",
+          "imageKey": "illus_lion_reading",
+          "audioKey": "story1_p1"
+        },
+        {
+          "id": 102,
+          "pageNumber": 2,
+          "text": "PLACEHOLDER - replace with Chitonga. Hare was very fast. Tortoise was slow, but he was wise.",
+          "imageKey": "illus_splash_baobab",
+          "audioKey": "story1_p2"
+        },
+        {
+          "id": 103,
+          "pageNumber": 3,
+          "text": "PLACEHOLDER - replace with Chitonga. They agreed to race to the big baobab tree.",
+          "imageKey": "illus_splash_baobab",
+          "audioKey": "story1_p3"
+        },
+        {
+          "id": 104,
+          "pageNumber": 4,
+          "text": "PLACEHOLDER - replace with Chitonga. Hare ran ahead and slept under a bush.",
+          "imageKey": "illus_lion_reading",
+          "audioKey": "story1_p4"
+        },
+        {
+          "id": 105,
+          "pageNumber": 5,
+          "text": "PLACEHOLDER - replace with Chitonga. Tortoise walked on and on, and reached the tree first.",
+          "imageKey": "illus_splash_baobab",
+          "audioKey": "story1_p5"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Mwana a Mulonga",
+      "coverImageKey": "illus_splash_baobab",
+      "sortOrder": 2,
+      "pages": [
+        {
+          "id": 201,
+          "pageNumber": 1,
+          "text": "PLACEHOLDER - replace with Chitonga. A child walked down to the river at sunrise.",
+          "imageKey": "illus_splash_baobab",
+          "audioKey": "story2_p1"
+        },
+        {
+          "id": 202,
+          "pageNumber": 2,
+          "text": "PLACEHOLDER - replace with Chitonga. The water was cool and the birds were singing.",
+          "imageKey": "illus_lion_reading",
+          "audioKey": "story2_p2"
+        },
+        {
+          "id": 203,
+          "pageNumber": 3,
+          "text": "PLACEHOLDER - replace with Chitonga. She filled her pot and carried it home to her mother.",
+          "imageKey": "illus_onboarding_blocks",
+          "audioKey": "story2_p3"
+        }
+      ]
     }
   ]
 }

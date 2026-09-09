@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TongaKids.Models"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.StoriesPage"
+             x:DataType="vm:StoryLibraryViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Stories" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="16">
+            <Label Text="Story Library" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+            <Label Text="Choose a story to read together." Style="{StaticResource BodyMd}" />
+
+            <Label Text="No stories yet." Style="{StaticResource BodyMd}"
+                   IsVisible="{Binding IsEmpty}" />
+
+            <CollectionView ItemsSource="{Binding Stories}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Story">
+                        <Border Style="{StaticResource Card}" Padding="12">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoryLibraryViewModel}}, Path=OpenCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                                <Border Grid.Column="0" WidthRequest="88" HeightRequest="88"
+                                        StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12" />
+                                    </Border.StrokeShape>
+                                    <Image Source="{Binding CoverImageKey, StringFormat='{0}.png'}"
+                                           Aspect="AspectFill" />
+                                </Border>
+                                <Label Grid.Column="1" Text="{Binding Title}"
+                                       Style="{StaticResource TitleLg}" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Text="chevron_right"
+                                       Style="{StaticResource Icon}" FontSize="28"
+                                       TextColor="{StaticResource Primary}"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

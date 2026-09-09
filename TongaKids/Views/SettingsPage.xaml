@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Settings" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="16">
+
+            <Label Text="Settings" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Currently learning" Style="{StaticResource LabelLg}"
+                           TextColor="{StaticResource OnSurfaceVariant}" />
+                    <Label Text="{Binding CurrentLearner}" Style="{StaticResource TitleLg}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <controls:TactileButton Text="Switch learner"
+                                    BackgroundFill="{StaticResource SecondaryContainer}"
+                                    DepthColor="{StaticResource OnSecondaryContainer}"
+                                    TextColor="{StaticResource OnSecondaryFixed}"
+                                    Command="{Binding SwitchLearnerCommand}" />
+
+            <controls:TactileButton Text="Parents only"
+                                    BackgroundFill="{StaticResource Primary}"
+                                    DepthColor="{StaticResource OnPrimaryFixed}"
+                                    TextColor="{StaticResource OnPrimary}"
+                                    Command="{Binding OpenParentAreaCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

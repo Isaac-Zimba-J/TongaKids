@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
              x:Class="TongaKids.Views.ProgressPage"
+             x:DataType="vm:ProgressViewModel"
              Shell.NavBarIsVisible="False">
-    <Label Text="Progress" Style="{StaticResource HeadlineLg}"
-           HorizontalOptions="Center" VerticalOptions="Center" />
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="24">
+
+            <Label Text="{Binding Title}" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+
+            <controls:StarRating Earned="{Binding Stars}" Total="5" StarSize="44"
+                                 HorizontalOptions="Center" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{Binding LessonsSummary}" Style="{StaticResource TitleLg}" />
+                    <ProgressBar Progress="{Binding Completion}"
+                                 ProgressColor="{StaticResource Tertiary}"
+                                 Style="{StaticResource PillProgress}" />
+                    <Label Text="{Binding AccuracySummary}" Style="{StaticResource BodyMd}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <HorizontalStackLayout Spacing="16">
+                    <Label Text="menu_book" Style="{StaticResource Icon}" FontSize="32"
+                           TextColor="{StaticResource Secondary}" VerticalOptions="Center" />
+                    <Label Text="{Binding StoriesSummary}" Style="{StaticResource TitleLg}"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

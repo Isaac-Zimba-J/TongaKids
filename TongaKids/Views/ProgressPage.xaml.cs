@@ -1,9 +1,20 @@
+using TongaKids.ViewModels;
+
 namespace TongaKids.Views;
 
 public partial class ProgressPage : ContentPage
 {
-    public ProgressPage()
+    private readonly ProgressViewModel _viewModel;
+
+    public ProgressPage(ProgressViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = _viewModel = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.LoadAsync();
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
+             x:Class="TongaKids.Views.ParentDashboardPage"
+             x:DataType="vm:ParentDashboardViewModel"
+             Title="Progress Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="16">
+
+            <Label Text="How your children are doing" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+
+            <Label Text="No learning recorded yet." Style="{StaticResource BodyMd}"
+                   IsVisible="{Binding IsEmpty}" />
+
+            <CollectionView ItemsSource="{Binding Reports}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LearnerReport">
+                        <Border Style="{StaticResource Card}">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="{Binding Name}" Style="{StaticResource TitleLg}" />
+
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
+                                      RowSpacing="16" ColumnSpacing="12">
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                                        <Label Text="Reading accuracy" Style="{StaticResource LabelLg}"
+                                               TextColor="{StaticResource OnSurfaceVariant}" />
+                                        <Label Text="{Binding Accuracy}" Style="{StaticResource HeadlineLg}"
+                                               TextColor="{StaticResource Tertiary}" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                                        <Label Text="Reading speed" Style="{StaticResource LabelLg}"
+                                               TextColor="{StaticResource OnSurfaceVariant}" />
+                                        <Label Text="{Binding WordsPerMinute}" Style="{StaticResource HeadlineLg}"
+                                               TextColor="{StaticResource Secondary}" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Row="1" Grid.Column="0">
+                                        <Label Text="Lessons mastered" Style="{StaticResource LabelLg}"
+                                               TextColor="{StaticResource OnSurfaceVariant}" />
+                                        <Label Text="{Binding Lessons}" Style="{StaticResource TitleLg}" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+                                        <Label Text="Needs practice" Style="{StaticResource LabelLg}"
+                                               TextColor="{StaticResource OnSurfaceVariant}" />
+                                        <Label Text="{Binding Weakest}" Style="{StaticResource BodyMd}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <controls:TactileButton Text="Consent and data"
+                                    BackgroundFill="{StaticResource Secondary}"
+                                    DepthColor="{StaticResource OnSecondaryFixedVariant}"
+                                    TextColor="{StaticResource OnSecondary}"
+                                    Command="{Binding OpenConsentCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

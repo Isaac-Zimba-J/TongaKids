@@ -13,6 +13,10 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("lesson", typeof(PhonicsLessonPage));
         Routing.RegisterRoute("game", typeof(MatchingGamePage));
         Routing.RegisterRoute("complete", typeof(LessonCompletePage));
+        Routing.RegisterRoute("reader", typeof(StoryReaderPage));
+        Routing.RegisterRoute("parentgate", typeof(ParentalGatePage));
+        Routing.RegisterRoute("parentdashboard", typeof(ParentDashboardPage));
+        Routing.RegisterRoute("consent", typeof(ConsentPage));
 
 #if DEBUG
         Routing.RegisterRoute("selfcheck", typeof(SelfCheckPage));

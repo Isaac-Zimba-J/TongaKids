@@ -48,6 +48,11 @@ public sealed class TongaKidsDatabase : ITongaKidsDatabase
             await connection.CreateTableAsync<LessonProgress>();
             await connection.CreateTableAsync<QuizAttempt>();
             await connection.CreateTableAsync<GuardianAccount>();
+            await connection.CreateTableAsync<Story>();
+            await connection.CreateTableAsync<StoryPage>();
+            await connection.CreateTableAsync<StoryReadState>();
+            await connection.CreateTableAsync<ReadingSession>();
+            await connection.CreateTableAsync<ParentSettings>();
 
             _connection = connection;
             return _connection;

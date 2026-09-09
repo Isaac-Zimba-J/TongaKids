@@ -6,5 +6,6 @@
     <converters:LockedOpacityConverter x:Key="LockedOpacity" />
     <converters:SelectionStrokeConverter x:Key="SelectionStroke" />
     <converters:SelectionThicknessConverter x:Key="SelectionThickness" />
+    <converters:InvertBoolConverter x:Key="Invert" />
 
 </ResourceDictionary>

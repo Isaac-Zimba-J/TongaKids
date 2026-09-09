@@ -2,11 +2,11 @@ using TongaKids.ViewModels;
 
 namespace TongaKids.Views;
 
-public partial class StoriesPage : ContentPage
+public partial class ParentalGatePage : ContentPage
 {
-    private readonly StoryLibraryViewModel _viewModel;
+    private readonly ParentalGateViewModel _viewModel;
 
-    public StoriesPage(StoryLibraryViewModel viewModel)
+    public ParentalGatePage(ParentalGateViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;

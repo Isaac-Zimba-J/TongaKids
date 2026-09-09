@@ -48,6 +48,6 @@ public sealed partial class OnboardingViewModel : ObservableObject
     private static async Task FinishAsync()
     {
         Preferences.Default.Set("onboarding_complete", true);
-        await Shell.Current.GoToAsync("//profiles");
+        await Shell.Current.GoToAsync("//register");
     }
 }

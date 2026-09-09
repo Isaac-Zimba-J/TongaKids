@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
+             x:Class="TongaKids.Views.ConsentPage"
+             x:DataType="vm:ConsentViewModel"
+             Title="Consent">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource ScreenPadding}" Spacing="16">
+
+            <Label Text="Your child's data" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource BodyMd}"
+                           Text="TongaKids Read stores your child's first name, the lessons they complete, their scores, and how long they spend reading." />
+                    <Label Style="{StaticResource BodyMd}"
+                           Text="All of this is kept on this device only. Nothing is sent over the internet, and the app works with no connection at all." />
+                    <Label Style="{StaticResource BodyMd}"
+                           Text="You can withdraw your consent at any time. This is asked of you under the Zambia Data Protection Act 2021." />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="{Binding StatusText}" Style="{StaticResource LabelLg}" />
+
+            <controls:TactileButton Text="I give my consent"
+                                    IsVisible="{Binding HasConsented, Converter={StaticResource Invert}}"
+                                    BackgroundFill="{StaticResource Tertiary}"
+                                    DepthColor="{StaticResource OnTertiaryFixed}"
+                                    TextColor="{StaticResource OnTertiary}"
+                                    Command="{Binding GiveConsentCommand}" />
+
+            <controls:TactileButton Text="Withdraw consent"
+                                    IsVisible="{Binding HasConsented}"
+                                    BackgroundFill="{StaticResource SurfaceContainerLowest}"
+                                    DepthColor="{StaticResource OutlineVariant}"
+                                    TextColor="{StaticResource Error}"
+                                    Command="{Binding WithdrawConsentCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

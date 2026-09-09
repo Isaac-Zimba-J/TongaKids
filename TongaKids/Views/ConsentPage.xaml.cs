@@ -2,11 +2,11 @@ using TongaKids.ViewModels;
 
 namespace TongaKids.Views;
 
-public partial class StoriesPage : ContentPage
+public partial class ConsentPage : ContentPage
 {
-    private readonly StoryLibraryViewModel _viewModel;
+    private readonly ConsentViewModel _viewModel;
 
-    public StoriesPage(StoryLibraryViewModel viewModel)
+    public ConsentPage(ConsentViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;

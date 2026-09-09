@@ -42,6 +42,8 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
         var db = await database.GetConnectionAsync();
 
         // Content tables only. Learner progress is never touched by seeding.
+        await db.DeleteAllAsync<StoryPage>();
+        await db.DeleteAllAsync<Story>();
         await db.DeleteAllAsync<PhonicsItem>();
         await db.DeleteAllAsync<Lesson>();
         await db.DeleteAllAsync<Level>();
@@ -98,6 +100,43 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
                         SortOrder = item.SortOrder
                     });
                 }
+            }
+        }
+
+        foreach (var story in pack.Stories)
+        {
+            if (story.Id <= 0 || string.IsNullOrWhiteSpace(story.Title))
+            {
+                continue;
+            }
+
+            await db.InsertAsync(new Story
+            {
+                Id = story.Id,
+                Title = story.Title,
+                CoverImageKey = story.CoverImageKey,
+                SortOrder = story.SortOrder
+            });
+
+            foreach (var page in story.Pages)
+            {
+                if (page.Id <= 0)
+                {
+                    continue;
+                }
+
+                await db.InsertAsync(new StoryPage
+                {
+                    Id = page.Id,
+                    StoryId = story.Id,
+                    PageNumber = page.PageNumber,
+                    Text = page.Text,
+                    ImageKey = page.ImageKey,
+                    AudioKey = page.AudioKey,
+                    // Derived, never authored: a hand-typed count would let
+                    // words-per-minute disagree with what is on the page.
+                    WordCount = page.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length
+                });
             }
         }
 
