@@ -52,15 +52,24 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
         }
 
         await db.ExecuteAsync("DELETE FROM Story WHERE IsUserCreated = 0");
-        await db.DeleteAllAsync<PhonicsItem>();
-        await db.DeleteAllAsync<Lesson>();
-        await db.DeleteAllAsync<Level>();
+
+        // Same rule for phonics: replace pack content, keep authored content.
+        await db.ExecuteAsync("DELETE FROM PhonicsItem WHERE IsUserCreated = 0");
+        await db.ExecuteAsync("DELETE FROM Lesson WHERE IsUserCreated = 0");
+        await db.ExecuteAsync("DELETE FROM Level WHERE IsUserCreated = 0");
+
+        // Anything the guardian deleted stays deleted, rather than reappearing
+        // on the next content update.
+        var tombstones = await db.Table<DeletedSeedItem>().ToListAsync();
+
+        bool WasDeleted(string kind, int id) =>
+            tombstones.Any(t => t.Kind == kind && t.SeedId == id);
 
         foreach (var level in pack.Levels)
         {
-            if (level.Id <= 0 || string.IsNullOrWhiteSpace(level.Title))
+            if (level.Id <= 0 || string.IsNullOrWhiteSpace(level.Title)
+                || WasDeleted("level", level.Id))
             {
-                System.Diagnostics.Debug.WriteLine($"[ContentSeeder] skipped level {level.Id}");
                 continue;
             }
 
@@ -76,7 +85,7 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
 
             foreach (var lesson in level.Lessons)
             {
-                if (lesson.Id <= 0)
+                if (lesson.Id <= 0 || WasDeleted("lesson", lesson.Id))
                 {
                     continue;
                 }
@@ -91,7 +100,8 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
 
                 foreach (var item in lesson.Items)
                 {
-                    if (item.Id <= 0 || string.IsNullOrWhiteSpace(item.Grapheme))
+                    if (item.Id <= 0 || string.IsNullOrWhiteSpace(item.Grapheme)
+                        || WasDeleted("item", item.Id))
                     {
                         continue;
                     }
@@ -113,7 +123,8 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
 
         foreach (var story in pack.Stories)
         {
-            if (story.Id <= 0 || string.IsNullOrWhiteSpace(story.Title))
+            if (story.Id <= 0 || string.IsNullOrWhiteSpace(story.Title)
+                || WasDeleted("story", story.Id))
             {
                 continue;
             }

@@ -20,6 +20,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("recordsounds", typeof(RecordSoundsPage));
         Routing.RegisterRoute("managestories", typeof(ManageStoriesPage));
         Routing.RegisterRoute("storyeditor", typeof(StoryEditorPage));
+        Routing.RegisterRoute("managephonics", typeof(ManagePhonicsPage));
+        Routing.RegisterRoute("lessoneditor", typeof(LessonEditorPage));
 
 #if DEBUG
         Routing.RegisterRoute("selfcheck", typeof(SelfCheckPage));

@@ -52,6 +52,35 @@ public sealed partial class ManageStoriesViewModel(
     }
 
     [RelayCommand]
+    private async Task DeleteAsync(StoryRowModel? row)
+    {
+        if (row is null)
+        {
+            return;
+        }
+
+        var page = Application.Current?.Windows[0].Page;
+        if (page is not null)
+        {
+            var confirmed = await page.DisplayAlert(
+                $"Delete \"{row.Title}\"?",
+                row.IsUserCreated
+                    ? "This story and its recordings will be removed. This cannot be undone."
+                    : "This story came with the app. Deleting it removes it for good; it will not come back with future updates.",
+                "Delete", "Cancel");
+
+            if (!confirmed)
+            {
+                return;
+            }
+        }
+
+        await stories.DeleteStoryAsync(row.Id);
+        await LoadAsync();
+        await dialogs.ToastAsync($"Deleted \"{row.Title}\"");
+    }
+
+    [RelayCommand]
     private static async Task OpenAsync(StoryRowModel? row)
     {
         if (row is not null)

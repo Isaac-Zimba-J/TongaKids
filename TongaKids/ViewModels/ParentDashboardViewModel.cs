@@ -54,4 +54,8 @@ public sealed partial class ParentDashboardViewModel(
     [RelayCommand]
     private static async Task OpenStoriesAsync() =>
         await Shell.Current.GoToAsync("managestories");
+
+    [RelayCommand]
+    private static async Task OpenPhonicsAsync() =>
+        await Shell.Current.GoToAsync("managephonics");
 }

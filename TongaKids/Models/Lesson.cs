@@ -9,4 +9,7 @@ public class Lesson
     [Indexed] public int LevelId { get; set; }
     public int Number { get; set; }
     public string Title { get; set; } = string.Empty;
+
+    /// <summary>True for content authored in the app; seeding never replaces it.</summary>
+    public bool IsUserCreated { get; set; }
 }

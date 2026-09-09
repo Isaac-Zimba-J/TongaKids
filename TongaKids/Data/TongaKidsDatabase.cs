@@ -53,6 +53,7 @@ public sealed class TongaKidsDatabase : ITongaKidsDatabase
             await connection.CreateTableAsync<StoryReadState>();
             await connection.CreateTableAsync<ReadingSession>();
             await connection.CreateTableAsync<ParentSettings>();
+            await connection.CreateTableAsync<DeletedSeedItem>();
 
             _connection = connection;
             return _connection;

@@ -60,6 +60,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <controls:TactileButton Text="Edit phonics"
+                                    BackgroundFill="{StaticResource SecondaryContainer}"
+                                    DepthColor="{StaticResource OnSecondaryContainer}"
+                                    TextColor="{StaticResource OnSecondaryFixed}"
+                                    Command="{Binding OpenPhonicsCommand}" />
+
             <controls:TactileButton Text="Write and record stories"
                                     BackgroundFill="{StaticResource TertiaryContainer}"
                                     DepthColor="{StaticResource OnTertiaryContainer}"

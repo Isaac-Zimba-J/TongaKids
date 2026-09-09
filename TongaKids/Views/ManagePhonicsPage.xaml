@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
+             x:Class="TongaKids.Views.ManagePhonicsPage"
+             x:DataType="vm:ManagePhonicsViewModel"
+             Title="Phonics">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource ScreenPadding}" RowSpacing="12">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="4">
+            <Label Text="Phonics" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+            <Label Text="Add your own levels, lessons and sounds, or remove ones you do not want."
+                   Style="{StaticResource BodyMd}" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Levels}" Spacing="16">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:LevelGroupModel">
+                        <Border Style="{StaticResource Card}" Padding="16">
+                            <VerticalStackLayout Spacing="12">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding Title}" Style="{StaticResource TitleLg}" />
+                                        <Label Text="{Binding Subtitle}" Style="{StaticResource BodyMd}"
+                                               FontSize="12" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1" Text="delete" Style="{StaticResource Icon}"
+                                           FontSize="24" TextColor="{StaticResource Error}" Padding="8">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ManagePhonicsViewModel}}, Path=DeleteLevelCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+
+                                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Lessons}"
+                                                     Spacing="8">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:LessonRowModel">
+                                            <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                                    Stroke="{StaticResource OutlineVariant}"
+                                                    StrokeThickness="1" Padding="12">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="8" />
+                                                </Border.StrokeShape>
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ManagePhonicsViewModel}}, Path=OpenLessonCommand}"
+                                                        CommandParameter="{Binding .}" />
+                                                </Border.GestureRecognizers>
+                                                <Grid ColumnDefinitions="*,Auto">
+                                                    <VerticalStackLayout Grid.Column="0">
+                                                        <Label Text="{Binding Title}"
+                                                               Style="{StaticResource LabelLg}" FontSize="15" />
+                                                        <Label Text="{Binding Subtitle}"
+                                                               Style="{StaticResource BodyMd}" FontSize="12" />
+                                                    </VerticalStackLayout>
+                                                    <Label Grid.Column="1" Text="chevron_right"
+                                                           Style="{StaticResource Icon}" FontSize="22"
+                                                           TextColor="{StaticResource Primary}"
+                                                           VerticalOptions="Center" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+
+                                <Label Text="+ Add a lesson" Style="{StaticResource LabelLg}"
+                                       TextColor="{StaticResource Secondary}" Padding="0,4">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ManagePhonicsViewModel}}, Path=AddLessonCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:TactileButton Grid.Row="2" Text="New level"
+                                BackgroundFill="{StaticResource PrimaryContainer}"
+                                DepthColor="{StaticResource OnPrimaryContainer}"
+                                TextColor="{StaticResource OnPrimary}"
+                                Command="{Binding AddLevelCommand}" />
+    </Grid>
+</ContentPage>

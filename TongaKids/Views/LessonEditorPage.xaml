@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
+             x:Class="TongaKids.Views.LessonEditorPage"
+             x:DataType="vm:LessonEditorViewModel"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="{StaticResource ScreenPadding}" RowSpacing="12">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="4">
+            <Label Text="{Binding Title}" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+            <Label Text="{Binding Summary}" Style="{StaticResource LabelLg}"
+                   TextColor="{StaticResource Tertiary}" />
+            <Label Text="Type the letters, an example word, then record yourself saying the sound."
+                   Style="{StaticResource BodyMd}" FontSize="13" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16">
+
+                <Label Text="No sounds yet. Tap Add sound to begin."
+                       Style="{StaticResource BodyMd}" IsVisible="{Binding IsEmpty}"
+                       HorizontalTextAlignment="Center" Margin="0,24" />
+
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Sounds}" Spacing="16">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:SoundEditModel">
+                            <Border Style="{StaticResource Card}" Padding="16">
+                                <VerticalStackLayout Spacing="10">
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Border Grid.Column="0"
+                                                BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                                Stroke="{StaticResource OutlineVariant}"
+                                                StrokeThickness="1" Padding="12,0">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="8" />
+                                            </Border.StrokeShape>
+                                            <Entry Text="{Binding Grapheme, Mode=TwoWay}"
+                                                   Placeholder="Letters, e.g. BA"
+                                                   FontFamily="NunitoExtraBold" FontSize="28"
+                                                   TextColor="{StaticResource PrimaryContainer}" />
+                                        </Border>
+                                        <Label Grid.Column="1" Text="delete" Style="{StaticResource Icon}"
+                                               FontSize="24" TextColor="{StaticResource Error}"
+                                               Padding="8" VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LessonEditorViewModel}}, Path=DeleteSoundCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+
+                                    <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                            Stroke="{StaticResource OutlineVariant}"
+                                            StrokeThickness="1" Padding="12,0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="8" />
+                                        </Border.StrokeShape>
+                                        <Entry Text="{Binding ExampleWord, Mode=TwoWay}"
+                                               Placeholder="Example word in Chitonga" />
+                                    </Border>
+
+                                    <Border BackgroundColor="{StaticResource SurfaceContainerLow}"
+                                            Stroke="{StaticResource OutlineVariant}"
+                                            StrokeThickness="1" Padding="12,0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="8" />
+                                        </Border.StrokeShape>
+                                        <Entry Text="{Binding Gloss, Mode=TwoWay}"
+                                               Placeholder="What it means in English" />
+                                    </Border>
+
+                                    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                        <Label Grid.Column="0" Text="{Binding RecordLabel}"
+                                               Style="{StaticResource LabelLg}" FontSize="12"
+                                               TextColor="{StaticResource OnSurfaceVariant}"
+                                               VerticalOptions="Center" />
+
+                                        <Border Grid.Column="1" WidthRequest="48" HeightRequest="48"
+                                                BackgroundColor="{StaticResource SecondaryContainer}"
+                                                StrokeThickness="0" IsVisible="{Binding IsRecorded}">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="24" />
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LessonEditorViewModel}}, Path=PlayCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Label Text="play_arrow" Style="{StaticResource Icon}"
+                                                   FontSize="26"
+                                                   TextColor="{StaticResource OnSecondaryContainer}"
+                                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Border>
+
+                                        <Border Grid.Column="2" WidthRequest="56" HeightRequest="56"
+                                                BackgroundColor="{StaticResource PrimaryContainer}"
+                                                StrokeThickness="0">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="28" />
+                                            </Border.StrokeShape>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LessonEditorViewModel}}, Path=ToggleRecordCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Label Text="{Binding RecordGlyph}" Style="{StaticResource Icon}"
+                                                   FontSize="28" TextColor="{StaticResource OnPrimary}"
+                                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Border>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:TactileButton Grid.Row="2" Text="Add sound"
+                                BackgroundFill="{StaticResource Secondary}"
+                                DepthColor="{StaticResource OnSecondaryFixedVariant}"
+                                TextColor="{StaticResource OnSecondary}"
+                                Command="{Binding AddSoundCommand}" />
+    </Grid>
+</ContentPage>

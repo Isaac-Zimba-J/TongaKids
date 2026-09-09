@@ -13,4 +13,7 @@ public class Level
     public string IconGlyph { get; set; } = string.Empty;
     /// <summary>Level number that must be mastered first. 0 means always unlocked.</summary>
     public int RequiresLevelNumber { get; set; }
+
+    /// <summary>True for content authored in the app; seeding never replaces it.</summary>
+    public bool IsUserCreated { get; set; }
 }

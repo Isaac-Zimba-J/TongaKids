@@ -16,4 +16,7 @@ public class PhonicsItem
     public string Gloss { get; set; } = string.Empty;
     public string ImageKey { get; set; } = string.Empty;
     public int SortOrder { get; set; }
+
+    /// <summary>True for content authored in the app; seeding never replaces it.</summary>
+    public bool IsUserCreated { get; set; }
 }

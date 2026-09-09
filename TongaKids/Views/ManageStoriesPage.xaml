@@ -34,9 +34,19 @@
                                 <Label Text="{Binding Subtitle}" Style="{StaticResource BodyMd}"
                                        FontSize="13" />
                             </VerticalStackLayout>
-                            <Label Grid.Column="1" Text="chevron_right" Style="{StaticResource Icon}"
-                                   FontSize="28" TextColor="{StaticResource Primary}"
-                                   VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="1" Spacing="4"
+                                                   VerticalOptions="Center">
+                                <Label Text="delete" Style="{StaticResource Icon}" FontSize="24"
+                                       TextColor="{StaticResource Error}" Padding="8">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ManageStoriesViewModel}}, Path=DeleteCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Label Text="chevron_right" Style="{StaticResource Icon}"
+                                       FontSize="28" TextColor="{StaticResource Primary}" />
+                            </HorizontalStackLayout>
                         </Grid>
                     </Border>
                 </DataTemplate>

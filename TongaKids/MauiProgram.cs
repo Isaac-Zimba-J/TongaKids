@@ -73,6 +73,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<RecordSoundsViewModel>();
 		builder.Services.AddTransient<ManageStoriesViewModel>();
 		builder.Services.AddTransient<StoryEditorViewModel>();
+		builder.Services.AddTransient<ManagePhonicsViewModel>();
+		builder.Services.AddTransient<LessonEditorViewModel>();
 
 		// Pages are transient so each navigation gets fresh state.
 		builder.Services.AddTransient<SplashPage>();
@@ -95,6 +97,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<RecordSoundsPage>();
 		builder.Services.AddTransient<ManageStoriesPage>();
 		builder.Services.AddTransient<StoryEditorPage>();
+		builder.Services.AddTransient<ManagePhonicsPage>();
+		builder.Services.AddTransient<LessonEditorPage>();
 
 #if DEBUG
 		builder.Services.AddSingleton<ISelfCheck, ProgressSelfCheck>();

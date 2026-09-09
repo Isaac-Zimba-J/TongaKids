@@ -121,8 +121,26 @@ public sealed class StoryRepository(ITongaKidsDatabase database) : IStoryReposit
     public async Task DeleteStoryAsync(int storyId)
     {
         var db = await database.GetConnectionAsync();
+
+        var story = await db.Table<Story>().Where(s => s.Id == storyId).FirstOrDefaultAsync();
+        if (story is null)
+        {
+            return;
+        }
+
         await db.ExecuteAsync("DELETE FROM StoryPage WHERE StoryId = ?", storyId);
-        await db.ExecuteAsync("DELETE FROM Story WHERE Id = ? AND IsUserCreated = 1", storyId);
+        await db.ExecuteAsync("DELETE FROM Story WHERE Id = ?", storyId);
+
+        // A pack story must stay deleted, or the next content update restores it.
+        if (!story.IsUserCreated)
+        {
+            await db.InsertAsync(new DeletedSeedItem
+            {
+                Kind = "story",
+                SeedId = storyId,
+                DeletedAt = DateTime.UtcNow
+            });
+        }
     }
 
     public async Task<StoryPage> AddPageAsync(int storyId)
