@@ -14,10 +14,15 @@ public sealed partial class ClipRowModel(ClipToRecord clip) : ObservableObject
 
     [ObservableProperty] private bool _isRecorded = clip.IsRecorded;
     [ObservableProperty] private bool _isRecording;
+    [ObservableProperty] private string _elapsed = string.Empty;
 
     public string StatusGlyph => IsRecording ? "stop_circle" : IsRecorded ? "check_circle" : "mic";
-    public string StatusLabel => IsRecording ? "Recording... tap to stop"
+
+    public string StatusLabel => IsRecording
+        ? $"Recording {Elapsed} - tap to stop"
         : IsRecorded ? "Recorded" : "Not recorded yet";
+
+    partial void OnElapsedChanged(string value) => OnPropertyChanged(nameof(StatusLabel));
 
     partial void OnIsRecordedChanged(bool value)
     {
@@ -42,6 +47,8 @@ public sealed partial class RecordSoundsViewModel(
     [ObservableProperty] private string _summary = string.Empty;
 
     private ClipRowModel? _active;
+    private IDispatcherTimer? _tick;
+    private DateTime _startedAt;
 
     [RelayCommand]
     public async Task LoadAsync()
@@ -75,29 +82,15 @@ public sealed partial class RecordSoundsViewModel(
         // Tapping the row that is already recording stops it.
         if (row.IsRecording)
         {
-            var saved = await recording.StopAsync();
-            row.IsRecording = false;
-            _active = null;
-
-            if (saved)
-            {
-                row.IsRecorded = true;
-                UpdateSummary();
-                await dialogs.ToastAsync($"Saved \"{row.Say}\"");
-            }
-            else
-            {
-                await dialogs.AlertAsync("Nothing recorded",
-                    "That take did not capture any sound. Please try again.");
-            }
-
+            await FinishAsync(row);
             return;
         }
 
-        // Only one recording at a time.
+        // Only one recording at a time; abandon any other take.
         if (_active is not null)
         {
-            await recording.StopAsync();
+            await recording.CancelAsync();
+            StopTicking();
             _active.IsRecording = false;
             _active = null;
         }
@@ -118,6 +111,98 @@ public sealed partial class RecordSoundsViewModel(
 
         row.IsRecording = true;
         _active = row;
+        StartTicking();
+    }
+
+    /// <summary>Stops, saves and reports. Shared by the stop tap and the time cap.</summary>
+    private async Task FinishAsync(ClipRowModel row, bool hitLimit = false)
+    {
+        StopTicking();
+
+        var saved = await recording.StopAsync();
+        row.IsRecording = false;
+        row.Elapsed = string.Empty;
+        _active = null;
+
+        if (saved)
+        {
+            row.IsRecorded = true;
+            UpdateSummary();
+            await dialogs.ToastAsync(hitLimit
+                ? $"Saved \"{row.Say}\" at the time limit"
+                : $"Saved \"{row.Say}\"");
+        }
+        else
+        {
+            await dialogs.AlertAsync("Nothing recorded",
+                "That take did not capture any sound. Please try again.");
+        }
+    }
+
+    private void StartTicking()
+    {
+        _startedAt = DateTime.UtcNow;
+
+        _tick = Application.Current?.Dispatcher.CreateTimer();
+        if (_tick is null)
+        {
+            return;
+        }
+
+        _tick.Interval = TimeSpan.FromMilliseconds(250);
+        _tick.Tick += OnTick;
+        _tick.Start();
+    }
+
+    private async void OnTick(object? sender, EventArgs e)
+    {
+        var row = _active;
+        if (row is null)
+        {
+            StopTicking();
+            return;
+        }
+
+        var elapsed = DateTime.UtcNow - _startedAt;
+        row.Elapsed = $"{(int)elapsed.TotalSeconds}s";
+
+        // Someone who walks away mid-take would otherwise record until the
+        // device filled up. Stop and keep what was captured.
+        if (elapsed >= recording.MaxDuration)
+        {
+            await FinishAsync(row, hitLimit: true);
+        }
+    }
+
+    private void StopTicking()
+    {
+        if (_tick is not null)
+        {
+            _tick.Tick -= OnTick;
+            _tick.Stop();
+            _tick = null;
+        }
+    }
+
+    /// <summary>
+    /// Called when the screen goes away. Leaving mid-take abandons it rather than
+    /// saving, so a half-finished clip can never replace a good one.
+    /// </summary>
+    public async Task AbandonAsync()
+    {
+        StopTicking();
+
+        if (_active is not null || recording.IsRecording)
+        {
+            await recording.CancelAsync();
+
+            if (_active is not null)
+            {
+                _active.IsRecording = false;
+                _active.Elapsed = string.Empty;
+                _active = null;
+            }
+        }
     }
 
     [RelayCommand]

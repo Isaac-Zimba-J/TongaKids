@@ -17,7 +17,16 @@ public interface IRecordingService
     /// <summary>Asks for the microphone. False if the person declined.</summary>
     Task<bool> EnsurePermissionAsync();
 
+    /// <summary>Longest take allowed, after which recording stops on its own.</summary>
+    TimeSpan MaxDuration { get; }
+
+    /// <summary>The key currently being recorded, or null.</summary>
+    string? CurrentKey { get; }
+
     Task<bool> StartAsync(string audioKey);
+
+    /// <summary>Stops and throws the take away, leaving any saved clip untouched.</summary>
+    Task CancelAsync();
 
     /// <summary>Stops and saves. False if nothing usable was captured.</summary>
     Task<bool> StopAsync();

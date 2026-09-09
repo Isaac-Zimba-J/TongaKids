@@ -11,7 +11,7 @@ namespace TongaKids.ViewModels;
 public sealed partial class MatchingGameViewModel(
     IContentRepository content,
     IPhonicsEngine engine,
-    IAudioService audio) : ObservableObject
+    IAudioService audio) : ObservableObject, ILeavingAware
 {
     private const int OptionCount = 4;
 
@@ -130,5 +130,12 @@ public sealed partial class MatchingGameViewModel(
         await Shell.Current.GoToAsync(
             $"complete?lessonId={LessonId}&correct={_correctCount}" +
             $"&total={_questions.Count}&durationMs={_timer.ElapsedMilliseconds}");
+    }
+
+    public async Task OnLeavingAsync()
+    {
+        // Abandoning a quiz records nothing: a partial attempt is not a result.
+        _timer.Stop();
+        await audio.StopAsync();
     }
 }

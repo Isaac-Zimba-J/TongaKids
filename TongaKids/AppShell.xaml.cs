@@ -18,6 +18,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("parentdashboard", typeof(ParentDashboardPage));
         Routing.RegisterRoute("consent", typeof(ConsentPage));
         Routing.RegisterRoute("recordsounds", typeof(RecordSoundsPage));
+        Routing.RegisterRoute("managestories", typeof(ManageStoriesPage));
+        Routing.RegisterRoute("storyeditor", typeof(StoryEditorPage));
 
 #if DEBUG
         Routing.RegisterRoute("selfcheck", typeof(SelfCheckPage));

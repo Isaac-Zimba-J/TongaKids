@@ -10,7 +10,7 @@ namespace TongaKids.ViewModels;
 [QueryProperty(nameof(LessonId), "lessonId")]
 public sealed partial class PhonicsLessonViewModel(
     IContentRepository content,
-    IAudioService audio) : ObservableObject
+    IAudioService audio) : ObservableObject, ILeavingAware
 {
     [ObservableProperty] private int _lessonId;
     [ObservableProperty] private string _lessonTitle = string.Empty;
@@ -106,4 +106,6 @@ public sealed partial class PhonicsLessonViewModel(
 
     [RelayCommand]
     private async Task PlayGameAsync() => await Shell.Current.GoToAsync($"game?lessonId={LessonId}");
+
+    public async Task OnLeavingAsync() => await audio.StopAsync();
 }

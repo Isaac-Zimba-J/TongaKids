@@ -17,6 +17,14 @@ public sealed class RecordingService(
     private IAudioRecorder? _recorder;
     private string? _currentKey;
 
+    /// <summary>
+    /// A forgotten recording would otherwise run until the device filled up.
+    /// Sixty seconds is well beyond any single sound or story page.
+    /// </summary>
+    public TimeSpan MaxDuration { get; } = TimeSpan.FromSeconds(60);
+
+    public string? CurrentKey => _currentKey;
+
     public bool IsRecording => _recorder?.IsRecording == true;
 
     public async Task<List<ClipToRecord>> GetClipsAsync()
@@ -152,6 +160,41 @@ public sealed class RecordingService(
         {
             System.Diagnostics.Debug.WriteLine($"[Recording] stop failed: {ex.Message}");
             return false;
+        }
+        finally
+        {
+            _recorder = null;
+            _currentKey = null;
+        }
+    }
+
+    public async Task CancelAsync()
+    {
+        if (_recorder is null)
+        {
+            return;
+        }
+
+        var key = _currentKey;
+
+        try
+        {
+            await _recorder.StopAsync();
+
+            // Discard the take. Any previously saved clip is left alone, so
+            // walking away from the screen can never destroy good audio.
+            if (key is not null)
+            {
+                var temp = TempPath(key);
+                if (File.Exists(temp))
+                {
+                    File.Delete(temp);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[Recording] cancel failed: {ex.Message}");
         }
         finally
         {

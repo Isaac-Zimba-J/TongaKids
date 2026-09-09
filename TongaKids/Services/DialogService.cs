@@ -35,7 +35,12 @@ public sealed class DialogService : IDialogService
         try
         {
             await Task.Delay(delay);
-            await IPopupService.Current.PopAsync(popup);
+
+            // Task.Delay resumes on a background thread, and popping a popup must
+            // happen on the UI thread. Without this the pop fails silently and the
+            // toast stays on screen forever.
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+                await IPopupService.Current.PopAsync(popup));
         }
         catch (Exception ex)
         {

@@ -42,8 +42,16 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
         var db = await database.GetConnectionAsync();
 
         // Content tables only. Learner progress is never touched by seeding.
-        await db.DeleteAllAsync<StoryPage>();
-        await db.DeleteAllAsync<Story>();
+        // Replace only the stories that came from the pack. Anything a guardian
+        // wrote in the app is theirs and must survive a content update.
+        var seededIds = await db.QueryScalarsAsync<int>(
+            "SELECT Id FROM Story WHERE IsUserCreated = 0");
+        foreach (var seededId in seededIds)
+        {
+            await db.ExecuteAsync("DELETE FROM StoryPage WHERE StoryId = ?", seededId);
+        }
+
+        await db.ExecuteAsync("DELETE FROM Story WHERE IsUserCreated = 0");
         await db.DeleteAllAsync<PhonicsItem>();
         await db.DeleteAllAsync<Lesson>();
         await db.DeleteAllAsync<Level>();

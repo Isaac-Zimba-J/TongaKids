@@ -11,7 +11,7 @@ namespace TongaKids.ViewModels;
 public sealed partial class StoryReaderViewModel(
     IStoryRepository stories,
     IAudioService audio,
-    ILearnerSession session) : ObservableObject
+    ILearnerSession session) : ObservableObject, ILeavingAware
 {
     [ObservableProperty] private int _storyId;
     [ObservableProperty] private string _pageText = string.Empty;
@@ -138,5 +138,13 @@ public sealed partial class StoryReaderViewModel(
         }
 
         await Shell.Current.GoToAsync("//main/stories");
+    }
+
+    public async Task OnLeavingAsync()
+    {
+        // A reading session is only recorded when the story is finished, so
+        // leaving part-way simply stops the clock and the narration.
+        _timer.Stop();
+        await audio.StopAsync();
     }
 }
