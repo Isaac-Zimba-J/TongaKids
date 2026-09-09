@@ -6,8 +6,23 @@ namespace TongaKids.Services;
 /// Clip playback. A missing clip is silence, never an error: the app must be
 /// fully usable before a single word of Chitonga has been recorded.
 /// </summary>
+/// <remarks>
+/// Resolution order is deliberate. A clip recorded inside the app wins over the
+/// bundled asset, so a guardian or teacher can voice the sounds in their own
+/// dialect and hear the result immediately.
+/// </remarks>
 public sealed class AudioService(IAudioManager audioManager) : IAudioService
 {
+    /// <summary>Where in-app recordings live. Writable, unlike bundled assets.</summary>
+    public static string RecordingsDirectory =>
+        Path.Combine(FileSystem.AppDataDirectory, "recordings");
+
+    public static string PathFor(string audioKey) =>
+        Path.Combine(RecordingsDirectory, $"{audioKey}.m4a");
+
+    public bool HasRecording(string audioKey) =>
+        !string.IsNullOrWhiteSpace(audioKey) && File.Exists(PathFor(audioKey));
+
     private IAudioPlayer? _player;
 
     public async Task<bool> PlayAsync(string audioKey)
@@ -19,9 +34,25 @@ public sealed class AudioService(IAudioManager audioManager) : IAudioService
 
         await StopAsync();
 
+        // 1. A clip recorded in the app.
+        var recorded = PathFor(audioKey);
+        if (File.Exists(recorded))
+        {
+            try
+            {
+                _player = audioManager.CreatePlayer(File.OpenRead(recorded));
+                _player.Play();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[Audio] recorded '{audioKey}' failed: {ex.Message}");
+            }
+        }
+
+        // 2. A clip shipped with the app.
         try
         {
-            // Raw assets are addressed by their path under Resources/Raw.
             await using var stream = await FileSystem.OpenAppPackageFileAsync($"audio/{audioKey}.m4a");
 
             // The stream must outlive this call, so copy it into memory first.

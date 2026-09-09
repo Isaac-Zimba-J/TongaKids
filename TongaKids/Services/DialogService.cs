@@ -17,9 +17,31 @@ public sealed class DialogService : IDialogService
         return await popup.Completion;
     }
 
+    /// <summary>
+    /// The library's Toast has no auto-dismiss, so it stays on screen until
+    /// something pops it. This shows it, returns immediately, and dismisses it
+    /// on a timer without making the caller wait.
+    /// </summary>
     public async Task ToastAsync(string title)
     {
-        await IPopupService.Current.PushAsync(new TongaToast(title));
+        var toast = new TongaToast(title);
+        await IPopupService.Current.PushAsync(toast);
+
+        _ = DismissAfterAsync(toast, TimeSpan.FromSeconds(2.2));
+    }
+
+    private static async Task DismissAfterAsync(PopupPage popup, TimeSpan delay)
+    {
+        try
+        {
+            await Task.Delay(delay);
+            await IPopupService.Current.PopAsync(popup);
+        }
+        catch (Exception ex)
+        {
+            // Already dismissed, or the page went away first. Nothing to do.
+            System.Diagnostics.Debug.WriteLine($"[Dialogs] toast dismiss: {ex.Message}");
+        }
     }
 
     public async Task AlertAsync(string title, string message, string acceptText = "OK")

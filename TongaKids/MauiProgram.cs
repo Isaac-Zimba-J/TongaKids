@@ -48,6 +48,7 @@ public static class MauiProgram
 		// Audio. Silent when a clip has not been recorded yet.
 		builder.Services.AddSingleton(AudioManager.Current);
 		builder.Services.AddSingleton<IAudioService, AudioService>();
+		builder.Services.AddSingleton<IRecordingService, RecordingService>();
 
 		// Popups and modals, via UXDivers Popups.
 		builder.Services.AddSingleton<IDialogService, DialogService>();
@@ -69,6 +70,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<ConsentViewModel>();
 		builder.Services.AddTransient<ParentDashboardViewModel>();
 		builder.Services.AddTransient<SettingsViewModel>();
+		builder.Services.AddTransient<RecordSoundsViewModel>();
 
 		// Pages are transient so each navigation gets fresh state.
 		builder.Services.AddTransient<SplashPage>();
@@ -88,6 +90,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<ParentalGatePage>();
 		builder.Services.AddTransient<ParentDashboardPage>();
 		builder.Services.AddTransient<ConsentPage>();
+		builder.Services.AddTransient<RecordSoundsPage>();
 
 #if DEBUG
 		builder.Services.AddSingleton<ISelfCheck, ProgressSelfCheck>();

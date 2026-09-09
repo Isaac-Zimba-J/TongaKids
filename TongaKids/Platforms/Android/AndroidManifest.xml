@@ -21,4 +21,8 @@
                android:roundIcon="@mipmap/appicon_round"
                android:supportsRtl="true" />
 
+
+  <!-- Guardians record the Chitonga sounds in the parent area. -->
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
 </manifest>

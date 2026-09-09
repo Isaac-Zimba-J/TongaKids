@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TongaKids.ViewModels"
+             x:Class="TongaKids.Views.RecordSoundsPage"
+             x:DataType="vm:RecordSoundsViewModel"
+             Title="Record the sounds">
+
+    <Grid RowDefinitions="Auto,*" Padding="{StaticResource ScreenPadding}" RowSpacing="12">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="4">
+            <Label Text="Record the sounds" Style="{StaticResource HeadlineLg}"
+                   TextColor="{StaticResource Primary}" />
+            <Label Text="Say each sound clearly in Chitonga. Tap the microphone to start, tap again to stop."
+                   Style="{StaticResource BodyMd}" />
+            <Label Text="{Binding Summary}" Style="{StaticResource LabelLg}"
+                   TextColor="{StaticResource Tertiary}" Margin="0,4,0,0" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Clips}" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:ClipRowModel">
+                    <Border Style="{StaticResource Card}" Padding="12">
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="{Binding Say}" Style="{StaticResource TitleLg}"
+                                       LineBreakMode="TailTruncation" MaxLines="2" />
+                                <Label Text="{Binding Context}" Style="{StaticResource BodyMd}"
+                                       FontSize="13" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding StatusLabel}" Style="{StaticResource LabelLg}"
+                                       FontSize="12" TextColor="{StaticResource OnSurfaceVariant}" />
+                            </VerticalStackLayout>
+
+                            <!-- Play back what was recorded -->
+                            <Border Grid.Column="1" WidthRequest="48" HeightRequest="48"
+                                    BackgroundColor="{StaticResource SecondaryContainer}"
+                                    StrokeThickness="0" IsVisible="{Binding IsRecorded}"
+                                    VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="24" />
+                                </Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecordSoundsViewModel}}, Path=PlayCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Label Text="play_arrow" Style="{StaticResource Icon}" FontSize="26"
+                                       TextColor="{StaticResource OnSecondaryContainer}"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+
+                            <!-- Re-record: clear the existing clip -->
+                            <Border Grid.Column="2" WidthRequest="48" HeightRequest="48"
+                                    BackgroundColor="{StaticResource SurfaceContainerHigh}"
+                                    StrokeThickness="0" IsVisible="{Binding IsRecorded}"
+                                    VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="24" />
+                                </Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecordSoundsViewModel}}, Path=DeleteCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Label Text="delete" Style="{StaticResource Icon}" FontSize="24"
+                                       TextColor="{StaticResource Error}"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+
+                            <!-- Record / stop -->
+                            <Border Grid.Column="3" WidthRequest="56" HeightRequest="56"
+                                    BackgroundColor="{StaticResource PrimaryContainer}"
+                                    StrokeThickness="0" VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="28" />
+                                </Border.StrokeShape>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecordSoundsViewModel}}, Path=ToggleRecordCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Label Text="{Binding StatusGlyph}" Style="{StaticResource Icon}"
+                                       FontSize="28" TextColor="{StaticResource OnPrimary}"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
