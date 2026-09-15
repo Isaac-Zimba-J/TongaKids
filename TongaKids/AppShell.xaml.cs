@@ -17,7 +17,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("parentgate", typeof(ParentalGatePage));
         Routing.RegisterRoute("parentdashboard", typeof(ParentDashboardPage));
         Routing.RegisterRoute("consent", typeof(ConsentPage));
-        Routing.RegisterRoute("recordsounds", typeof(RecordSoundsPage));
         Routing.RegisterRoute("managestories", typeof(ManageStoriesPage));
         Routing.RegisterRoute("storyeditor", typeof(StoryEditorPage));
         Routing.RegisterRoute("managephonics", typeof(ManagePhonicsPage));

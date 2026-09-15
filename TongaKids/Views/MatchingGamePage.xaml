@@ -60,6 +60,10 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <!-- Feedback draws over the cards without blocking them. -->
+        <ContentView x:Name="FeedbackHost" Grid.Row="0" Grid.RowSpan="3"
+                     InputTransparent="True" />
+
         <controls:TactileButton Grid.Row="2" Text="Submit"
                                 BackgroundFill="{StaticResource Primary}"
                                 DepthColor="{StaticResource OnPrimaryFixed}"

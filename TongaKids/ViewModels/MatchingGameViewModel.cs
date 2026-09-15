@@ -21,6 +21,9 @@ public sealed partial class MatchingGameViewModel(
 
     public ObservableCollection<ChoiceCardModel> Choices { get; } = [];
 
+    /// <summary>Raised after each submission so the view can show feedback.</summary>
+    public event EventHandler<bool>? AnswerSubmitted;
+
     private IReadOnlyList<PhonicsQuestion> _questions = [];
     private int _questionIndex;
     private int _correctCount;
@@ -113,10 +116,17 @@ public sealed partial class MatchingGameViewModel(
             return;
         }
 
-        if (selected.Item.Id == _questions[_questionIndex].Target.Id)
+        var wasCorrect = selected.Item.Id == _questions[_questionIndex].Target.Id;
+        if (wasCorrect)
         {
             _correctCount++;
         }
+
+        AnswerSubmitted?.Invoke(this, wasCorrect);
+
+        // Let the feedback land before moving on. A child learns most in this
+        // moment, and previously the game advanced with no feedback at all.
+        await Task.Delay(600);
 
         _questionIndex++;
 

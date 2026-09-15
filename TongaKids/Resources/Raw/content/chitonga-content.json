@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "levels": [
     {
       "id": 1,
@@ -142,78 +142,5 @@
       "lessons": []
     }
   ],
-  "stories": [
-    {
-      "id": 1,
-      "title": "Sulwe a Fulwe",
-      "coverImageKey": "illus_lion_reading",
-      "sortOrder": 1,
-      "pages": [
-        {
-          "id": 101,
-          "pageNumber": 1,
-          "text": "PLACEHOLDER - replace with Chitonga. Long ago, Hare and Tortoise lived beside the great river.",
-          "imageKey": "illus_lion_reading",
-          "audioKey": "story1_p1"
-        },
-        {
-          "id": 102,
-          "pageNumber": 2,
-          "text": "PLACEHOLDER - replace with Chitonga. Hare was very fast. Tortoise was slow, but he was wise.",
-          "imageKey": "illus_splash_baobab",
-          "audioKey": "story1_p2"
-        },
-        {
-          "id": 103,
-          "pageNumber": 3,
-          "text": "PLACEHOLDER - replace with Chitonga. They agreed to race to the big baobab tree.",
-          "imageKey": "illus_splash_baobab",
-          "audioKey": "story1_p3"
-        },
-        {
-          "id": 104,
-          "pageNumber": 4,
-          "text": "PLACEHOLDER - replace with Chitonga. Hare ran ahead and slept under a bush.",
-          "imageKey": "illus_lion_reading",
-          "audioKey": "story1_p4"
-        },
-        {
-          "id": 105,
-          "pageNumber": 5,
-          "text": "PLACEHOLDER - replace with Chitonga. Tortoise walked on and on, and reached the tree first.",
-          "imageKey": "illus_splash_baobab",
-          "audioKey": "story1_p5"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Mwana a Mulonga",
-      "coverImageKey": "illus_splash_baobab",
-      "sortOrder": 2,
-      "pages": [
-        {
-          "id": 201,
-          "pageNumber": 1,
-          "text": "PLACEHOLDER - replace with Chitonga. A child walked down to the river at sunrise.",
-          "imageKey": "illus_splash_baobab",
-          "audioKey": "story2_p1"
-        },
-        {
-          "id": 202,
-          "pageNumber": 2,
-          "text": "PLACEHOLDER - replace with Chitonga. The water was cool and the birds were singing.",
-          "imageKey": "illus_lion_reading",
-          "audioKey": "story2_p2"
-        },
-        {
-          "id": 203,
-          "pageNumber": 3,
-          "text": "PLACEHOLDER - replace with Chitonga. She filled her pot and carried it home to her mother.",
-          "imageKey": "illus_onboarding_blocks",
-          "audioKey": "story2_p3"
-        }
-      ]
-    }
-  ]
+  "stories": []
 }

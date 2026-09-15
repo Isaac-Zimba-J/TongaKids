@@ -45,18 +45,18 @@ public sealed class ContentSeeder(ITongaKidsDatabase database) : IContentSeeder
         // Replace only the stories that came from the pack. Anything a guardian
         // wrote in the app is theirs and must survive a content update.
         var seededIds = await db.QueryScalarsAsync<int>(
-            "SELECT Id FROM Story WHERE IsUserCreated = 0");
+            "SELECT Id FROM Story WHERE IFNULL(IsUserCreated, 0) = 0");
         foreach (var seededId in seededIds)
         {
             await db.ExecuteAsync("DELETE FROM StoryPage WHERE StoryId = ?", seededId);
         }
 
-        await db.ExecuteAsync("DELETE FROM Story WHERE IsUserCreated = 0");
+        await db.ExecuteAsync("DELETE FROM Story WHERE IFNULL(IsUserCreated, 0) = 0");
 
         // Same rule for phonics: replace pack content, keep authored content.
-        await db.ExecuteAsync("DELETE FROM PhonicsItem WHERE IsUserCreated = 0");
-        await db.ExecuteAsync("DELETE FROM Lesson WHERE IsUserCreated = 0");
-        await db.ExecuteAsync("DELETE FROM Level WHERE IsUserCreated = 0");
+        await db.ExecuteAsync("DELETE FROM PhonicsItem WHERE IFNULL(IsUserCreated, 0) = 0");
+        await db.ExecuteAsync("DELETE FROM Lesson WHERE IFNULL(IsUserCreated, 0) = 0");
+        await db.ExecuteAsync("DELETE FROM Level WHERE IFNULL(IsUserCreated, 0) = 0");
 
         // Anything the guardian deleted stays deleted, rather than reappearing
         // on the next content update.

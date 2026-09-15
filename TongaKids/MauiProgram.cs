@@ -2,6 +2,8 @@ using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
 using UXDivers.Popups.Maui;
 using TongaKids.Data;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using TongaKids.Animations;
 using TongaKids.Services;
 using TongaKids.Services.SelfCheck;
 using TongaKids.ViewModels;
@@ -17,6 +19,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseUXDiversPopups()
+			.UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("NunitoSans-Regular.ttf", "NunitoRegular");
@@ -53,6 +56,9 @@ public static class MauiProgram
 		// Popups and modals, via UXDivers Popups.
 		builder.Services.AddSingleton<IDialogService, DialogService>();
 
+		// One clock per animated view; each runs its own timeline.
+		builder.Services.AddTransient<IAnimationClock, AnimationClock>();
+
 		// View models are transient, matching their pages.
 		builder.Services.AddTransient<OnboardingViewModel>();
 		builder.Services.AddTransient<RegisterViewModel>();
@@ -70,7 +76,6 @@ public static class MauiProgram
 		builder.Services.AddTransient<ConsentViewModel>();
 		builder.Services.AddTransient<ParentDashboardViewModel>();
 		builder.Services.AddTransient<SettingsViewModel>();
-		builder.Services.AddTransient<RecordSoundsViewModel>();
 		builder.Services.AddTransient<ManageStoriesViewModel>();
 		builder.Services.AddTransient<StoryEditorViewModel>();
 		builder.Services.AddTransient<ManagePhonicsViewModel>();
@@ -94,7 +99,6 @@ public static class MauiProgram
 		builder.Services.AddTransient<ParentalGatePage>();
 		builder.Services.AddTransient<ParentDashboardPage>();
 		builder.Services.AddTransient<ConsentPage>();
-		builder.Services.AddTransient<RecordSoundsPage>();
 		builder.Services.AddTransient<ManageStoriesPage>();
 		builder.Services.AddTransient<StoryEditorPage>();
 		builder.Services.AddTransient<ManagePhonicsPage>();

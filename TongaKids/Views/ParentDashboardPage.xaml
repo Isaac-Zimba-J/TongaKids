@@ -72,12 +72,6 @@
                                     TextColor="{StaticResource OnTertiaryFixed}"
                                     Command="{Binding OpenStoriesCommand}" />
 
-            <controls:TactileButton Text="Record the sounds"
-                                    BackgroundFill="{StaticResource PrimaryContainer}"
-                                    DepthColor="{StaticResource OnPrimaryContainer}"
-                                    TextColor="{StaticResource OnPrimary}"
-                                    Command="{Binding OpenRecordSoundsCommand}" />
-
             <controls:TactileButton Text="Consent and data"
                                     BackgroundFill="{StaticResource Secondary}"
                                     DepthColor="{StaticResource OnSecondaryFixedVariant}"

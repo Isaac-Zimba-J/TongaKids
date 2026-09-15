@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:TongaKids.Controls"
              x:Class="TongaKids.Views.SplashPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Background>
@@ -14,14 +15,14 @@
     <VerticalStackLayout Padding="{StaticResource ScreenPadding}"
                          Spacing="16" VerticalOptions="Center">
 
-        <Image Source="illus_splash_baobab.png"
+        <Image x:Name="Baobab" Source="illus_splash_baobab.png"
                HeightRequest="280" Aspect="AspectFit" />
 
-        <Label Text="TongaKids Read" Style="{StaticResource DisplayLg}"
+        <Label x:Name="Wordmark" Text="TongaKids Read" Style="{StaticResource DisplayLg}"
                TextColor="{StaticResource Primary}"
                HorizontalTextAlignment="Center" />
 
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+        <HorizontalStackLayout x:Name="Tagline" HorizontalOptions="Center" Spacing="10">
             <Label Text="Learn" Style="{StaticResource TitleLg}" />
             <Label Text="&#x2022;" Style="{StaticResource TitleLg}"
                    TextColor="{StaticResource PrimaryContainer}" />
@@ -31,9 +32,11 @@
             <Label Text="Grow" Style="{StaticResource TitleLg}" />
         </HorizontalStackLayout>
 
-        <ProgressBar x:Name="LoadingBar" Progress="0.4"
-                     Style="{StaticResource PillProgress}"
-                     WidthRequest="240" HorizontalOptions="Center" Margin="0,40,0,0" />
+        <!-- Three hopping dots rather than a flat bar, which read as a solid
+             slab against the gradient and made the app look stalled. -->
+        <controls:LoadingDots x:Name="Dots"
+                              DotColor="{StaticResource Primary}"
+                              Margin="0,32,0,0" />
 
         <Label Text="LOADING ADVENTURES..." Style="{StaticResource LabelLg}"
                TextColor="{StaticResource OnSurfaceVariant}"
